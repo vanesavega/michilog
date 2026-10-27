@@ -1,0 +1,62 @@
+<nav class="border-b border-borde bg-fondo">
+  <div class="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
+
+    <!-- Logo -->
+    <a routerLink="/hoy" class="flex items-center gap-2">
+      <span class="text-2xl">🐱</span>
+      <span class="text-xl font-semibold text-texto">Michilog</span>
+    </a>
+
+    <!-- Botón hamburguesa: solo en celular -->
+    <div class="flex items-center gap-1 md:order-2">
+      <app-boton-tema />
+      <button
+          type="button"
+          class="inline-flex h-10 w-10 items-center justify-center rounded-lg text-texto-suave hover:bg-superficie md:hidden"
+          (click)="toggleMenu()"
+      >
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 17 14">
+              <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15" />
+          </svg>
+      </button>
+    </div>
+
+    <!-- Links -->
+    <div id="menu-principal" class="w-full md:block md:w-auto" [class.hidden]="!menuAbierto()">
+      <ul class="mt-4 flex flex-col gap-1 rounded-lg border border-borde bg-superficie p-4 font-medium md:mt-0 md:flex-row md:gap-8 md:border-0 md:bg-transparent md:p-0">
+        <li>
+            <a
+                routerLink="/hoy"
+                routerLinkActive
+                #hoy="routerLinkActive"
+                (click)="cerrarMenu()"
+                class="block rounded px-3 py-2 hover:text-texto md:p-0"
+                [class.text-texto]="hoy.isActive"
+                [class.font-semibold]="hoy.isActive"
+                [class.text-texto-suave]="!hoy.isActive"
+            >
+                Hoy
+            </a>
+        </li>
+        <li>
+            <a
+                routerLink="/gatos"
+                routerLinkActive
+                #gatos="routerLinkActive"
+                (click)="cerrarMenu()"
+                class="block rounded px-3 py-2 hover:text-texto md:p-0"
+                [class.text-texto]="gatos.isActive"
+                [class.font-semibold]="gatos.isActive"
+                [class.text-texto-suave]="!gatos.isActive"
+            >
+              Gatos
+            </a>
+        </li>
+      </ul>
+     </div>
+  </div>
+</nav>
+
+<main class="mx-auto max-w-screen-xl p-4">
+  <router-outlet />
+</main>

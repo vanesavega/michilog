@@ -1,0 +1,25 @@
+# Dependencias
+node_modules/
+
+# Builds y cachés
+dist/
+.angular/
+out-tsc/
+coverage/
+
+# Variables de entorno (claves de la base de datos, desde el hito 3)
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+
+# Sistema y editores
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/tasks.json
