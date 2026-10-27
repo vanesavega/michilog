@@ -6,6 +6,4 @@ import { Shell } from './core/layout/shell/shell'
   selector: 'app-root',
   template: '<app-shell/>',
 })
-export class App {
-  protected readonly title = signal('michilog-web');
-}
+export class App {}

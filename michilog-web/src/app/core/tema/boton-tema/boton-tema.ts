@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { TemaService } from './temaService'
+import { TemaService } from '../temaService'
 
 @Component({
   imports: [],
