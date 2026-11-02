@@ -32,5 +32,9 @@ export const GatosStore = signalStore(
                 gatos: gatos.map(g => g.id === id ? {...g, ...cambios} : g),
             }));
         },
+        agregarVarios(lista: NuevoGato[]): void {
+            const nuevos: Gato[] = lista.map(datos => ({ id: crypto.randomUUID(), ...datos }));
+            patchState(store, ({ gatos }) => ({ gatos: [...gatos, ...nuevos] }));
+        },
     })),
 );

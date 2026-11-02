@@ -71,7 +71,20 @@ body {
   font-variation-settings: 'FILL' 1;
 }
 
+/* Marco de la bienvenida: en web, tarjeta de dos columnas */
+.marco-bienvenida {
+  @apply mx-auto flex min-h-dvh max-w-md flex-col
+         md:my-12 md:min-h-[680px] md:max-w-6xl md:flex-row md:rounded-[48px] md:border md:border-borde md:bg-superficie;
+}
+
+/* La página que pone el router-outlet ocupa todo el alto disponible */
+.contenido-bienvenida > :last-child {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+/* Cada página de la bienvenida: una columna que llena su espacio */
 .pagina-bienvenida {
-  @apply mx-auto flex min-h-dvh max-w-md flex-col px-6 pb-8 pt-6
-         md:my-12 md:min-h-0 md:max-w-lg md:rounded-[48px] md:border md:border-borde md:bg-superficie md:p-10;
+  @apply flex flex-1 flex-col;
 }

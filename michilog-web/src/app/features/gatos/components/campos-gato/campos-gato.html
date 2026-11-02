@@ -1,0 +1,57 @@
+<div [formGroup]="grupo()" class="flex flex-col gap-3 rounded-[32px] border border-borde bg-superficie p-4 md:bg-fondo">
+
+  <div class="flex items-center gap-3">
+    <button
+      type="button"
+      (click)="cambiarColor()"
+      title="Cambiar color"
+      class="flex size-16 shrink-0 items-center justify-center rounded-full bg-fondo md:bg-superficie"
+    >
+      <app-carita-gato class="block size-12" [color]="c.color.value" />
+    </button>
+
+    <label class="flex min-w-0 flex-1 flex-col gap-1">
+      <span class="text-sm font-bold text-texto-suave">{{ titulo() }}</span>
+      <input
+        formControlName="nombre"
+        placeholder="¿Cómo se llama?"
+        class="h-12 w-full rounded-full border border-borde bg-fondo px-5 md:bg-superficie"
+      />
+    </label>
+  </div>
+
+  @if (c.nombre.touched && c.nombre.invalid) {
+    <p class="px-2 text-sm font-bold text-error">Ponle un nombre (máximo 30 letras)</p>
+  }
+
+  <div class="grid grid-cols-2 gap-2">
+    @for (opcion of sexos; track opcion.valor) {
+      <button
+        type="button"
+        (click)="c.sexo.setValue(opcion.valor)"
+        class="h-11 rounded-full border font-bold"
+        [class.bg-boton]="c.sexo.value === opcion.valor"
+        [class.text-boton-texto]="c.sexo.value === opcion.valor"
+        [class.border-boton]="c.sexo.value === opcion.valor"
+        [class.border-borde]="c.sexo.value !== opcion.valor"
+      >
+        {{ opcion.texto }}
+      </button>
+    }
+  </div>
+
+  <div class="grid grid-cols-2 gap-2">
+    <select formControlName="mes" class="h-11 rounded-full border border-borde bg-fondo px-4 md:bg-superficie">
+      <option [ngValue]="null">Mes</option>
+      @for (mes of meses; track mes.valor) {
+        <option [ngValue]="mes.valor">{{ mes.nombre }}</option>
+      }
+    </select>
+    <select formControlName="anio" class="h-11 rounded-full border border-borde bg-fondo px-4 md:bg-superficie">
+      <option [ngValue]="null">Año</option>
+      @for (anio of anios; track anio) {
+        <option [ngValue]="anio">{{ anio }}</option>
+      }
+    </select>
+  </div>
+</div>

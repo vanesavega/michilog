@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { ColorGato } from '../../../../shared/carita-gato/pelaje';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CaritaGato } from '../../../../shared/carita-gato/carita-gato';
 
 type Eleccion = 'uno' | 'varios';
@@ -12,7 +12,7 @@ interface Opcion {
 }
 
 @Component({
-  imports: [ CaritaGato ],
+  imports: [ CaritaGato, RouterLink ],
   selector: 'app-cuantos',
   templateUrl: './cuantos.html',
 })

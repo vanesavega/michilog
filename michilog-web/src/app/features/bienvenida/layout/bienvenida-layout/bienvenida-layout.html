@@ -1,0 +1,18 @@
+<div class="marco-bienvenida">
+
+  <!-- Columna de la ilustración: solo en web -->
+  <aside class="hidden w-[42%] shrink-0 flex-col justify-between rounded-l-[48px] bg-chip-lavanda p-10 md:flex">
+    <app-logo />
+    <div class="flex justify-center">
+      <div class="flex size-80 items-center justify-center rounded-full bg-superficie">
+        <app-carita-gato class="block size-56" color="mantequilla" />
+      </div>
+    </div>
+    <p class="font-titulo text-xl font-semibold">El diario de tus gatos</p>
+  </aside>
+
+  <!-- Columna del contenido: aquí va cada página -->
+  <div class="contenido-bienvenida flex flex-1 flex-col px-6 pb-8 pt-6 md:p-12">
+    <router-outlet />
+  </div>
+</div>
