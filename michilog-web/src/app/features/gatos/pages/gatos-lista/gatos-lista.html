@@ -1,1 +1,11 @@
-<p>gatos-lista works!</p>
+<header class="mb-4">
+  <h1 class="font-titulo text-3xl font-semibold text-texto">Tu familia</h1>
+</header>
+
+<div class="flex flex-col gap-3">
+  @for (gato of store.ordenados(); track gato.id) {
+    <app-tarjeta-gato [gato]="gato" />
+  } @empty {
+    <p class="text-texto-suave">Todavía no hay gatos registrados.</p>
+  }
+</div>

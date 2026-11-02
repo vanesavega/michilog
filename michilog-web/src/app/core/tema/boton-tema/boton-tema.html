@@ -1,7 +1,7 @@
 <button
   type="button"
   (click)="tema.alternar()"
-  class="inline-flex h-10 w-10 items-center justify-center rounded-lg text-texto-suave hover:bg-superficie"
+  class="flex size-12 items-center justify-center rounded-full border border-borde bg-superficie text-texto"
 >
-  {{ tema.esOscuro()  ? '☀️' : '🌙' }}
+  <span class="material-symbols-rounded text-[22px]">{{ tema.esOscuro() ? 'light_mode' : 'dark_mode' }}</span>
 </button>

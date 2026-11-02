@@ -1,0 +1,23 @@
+<article class="flex items-center gap-4 rounded-[32px] border border-borde bg-superficie p-3 pr-4">
+  <div class="flex size-[72px] shrink-0 items-center justify-center rounded-full bg-chip-lavanda">
+    <app-carita-gato class="block size-[54px]" [color]="gato().color" />
+  </div>
+
+  <div class="min-w-0 flex-1">
+    <div class="flex items-center gap-1">
+      <h2 class="font-titulo text-xl font-semibold text-texto">{{ gato().nombre }}</h2>
+      @if (gato().sexo === 'hembra') {
+        <span class="material-symbols-rounded text-[18px] text-texto-suave">female</span>
+      } @else if (gato().sexo === 'macho') {
+        <span class="material-symbols-rounded text-[18px] text-texto-suave">male</span>
+      }
+    </div>
+    @if (edad()) {
+      <p class="text-sm text-texto-suave">{{ edad() }}</p>
+    }
+  </div>
+
+  <div class="flex size-9 shrink-0 items-center justify-center rounded-full bg-fondo text-texto">
+    <span class="material-symbols-rounded text-[20px]">chevron_right</span>
+  </div>
+</article>

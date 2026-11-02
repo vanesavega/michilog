@@ -1,21 +1,36 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* 1. Colores del tema: cambian entre claro y oscuro */
 :root {
-  --fondo: #ffffff;
-  --superficie: #f3f4f6;
-  --texto: #111827;
-  --texto-suave: #6b7280;
-  --borde: #e5e7eb;
+  --fondo: #f8f6fc;
+  --superficie: #ffffff;
+  --texto: #2b2838;
+  --texto-suave: #615c75;
+  --borde: #ddd8ea;
+  --boton: #2b2838;
+  --boton-texto: #ffffff;
+  --chip-lavanda: #dcd5f5;
+  --chip-menta: #cdebdc;
+  --chip-durazno: #ffdcc8;
+  --chip-mantequilla: #ffefb3;
+  --chip-cielo: #cde5f4;
   color-scheme: light;
 }
 
 .dark {
-  --fondo: #111827;
-  --superficie: #1f2937;
-  --texto: #f9fafb;
-  --texto-suave: #9ca3af;
-  --borde: #374151;
+  --fondo: #17161f;
+  --superficie: #232131;
+  --texto: #eeebf6;
+  --texto-suave: #aba6bf;
+  --borde: #3a3650;
+  --boton: #dcd5f5;
+  --boton-texto: #17161f;
+  --chip-lavanda: #3b355c;
+  --chip-menta: #2d4a3f;
+  --chip-durazno: #503a2f;
+  --chip-mantequilla: #4a4329;
+  --chip-cielo: #2b4254;
   color-scheme: dark;
 }
 
@@ -25,9 +40,33 @@
   --color-texto: var(--texto);
   --color-texto-suave: var(--texto-suave);
   --color-borde: var(--borde);
+  --color-boton: var(--boton);
+  --color-boton-texto: var(--boton-texto);
+  --color-chip-lavanda: var(--chip-lavanda);
+  --color-chip-menta: var(--chip-menta);
+  --color-chip-durazno: var(--chip-durazno);
+  --color-chip-mantequilla: var(--chip-mantequilla);
+  --color-chip-cielo: var(--chip-cielo);
+}
+
+/* 2. Colores fijos y fuentes: no cambian con el tema */
+@theme {
+  --color-pelaje-mantequilla: #ffefb3;
+  --color-pelaje-lavanda: #dcd5f5;
+  --color-pelaje-menta: #cdebdc;
+  --color-pelaje-durazno: #ffdcc8;
+  --color-pelaje-cielo: #cde5f4;
+
+  --font-titulo: "Fredoka", sans-serif;
+  --font-cuerpo: "Nunito", system-ui, sans-serif;
 }
 
 body {
   background-color: var(--fondo);
   color: var(--texto);
+  font-family: var(--font-cuerpo);
+}
+
+.icono-lleno {
+  font-variation-settings: 'FILL' 1;
 }

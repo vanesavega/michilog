@@ -1,62 +1,66 @@
-<nav class="border-b border-borde bg-fondo">
-  <div class="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
+<div class="min-h-dvh md:flex md:gap-6 md:p-6">
 
-    <!-- Logo -->
-    <a routerLink="/hoy" class="flex items-center gap-2">
-      <span class="text-2xl">🐱</span>
-      <span class="text-xl font-semibold text-texto">Michilog</span>
+  <!-- Menú lateral: solo en web -->
+  <aside class="sticky top-6 hidden h-[calc(100dvh-3rem)] w-60 shrink-0 flex-col gap-1 rounded-[36px] border border-borde bg-superficie p-5 md:flex">
+    <a routerLink="/hoy" class="mb-4 flex items-center gap-2 px-1">
+      <span class="flex size-10 items-center justify-center rounded-full bg-chip-lavanda">
+        <span class="material-symbols-rounded text-[22px]">pets</span>
+      </span>
+      <span class="font-titulo text-[22px] font-semibold">michilog</span>
     </a>
 
-    <!-- Botón hamburguesa: solo en celular -->
-    <div class="flex items-center gap-1 md:order-2">
-      <app-boton-tema />
-      <button
-          type="button"
-          class="inline-flex h-10 w-10 items-center justify-center rounded-lg text-texto-suave hover:bg-superficie md:hidden"
-          (click)="toggleMenu()"
+    @for (enlace of enlaces; track enlace.ruta) {
+      <a
+        [routerLink]="enlace.ruta"
+        routerLinkActive
+        #rla="routerLinkActive"
+        class="flex h-12 items-center gap-3 rounded-full px-4 font-bold"
+        [class.bg-chip-lavanda]="rla.isActive"
+        [class.text-texto]="rla.isActive"
+        [class.text-texto-suave]="!rla.isActive"
       >
-          <svg class="h-5 w-5" fill="none" viewBox="0 0 17 14">
-              <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15" />
-          </svg>
-      </button>
+        <span class="material-symbols-rounded text-[22px]" [class.icono-lleno]="rla.isActive">{{ enlace.icono }}</span>
+        {{ enlace.texto }}
+      </a>
+    }
+
+    <div class="mt-auto">
+      <app-boton-tema />
     </div>
+  </aside>
 
-    <!-- Links -->
-    <div id="menu-principal" class="w-full md:block md:w-auto" [class.hidden]="!menuAbierto()">
-      <ul class="mt-4 flex flex-col gap-1 rounded-lg border border-borde bg-superficie p-4 font-medium md:mt-0 md:flex-row md:gap-8 md:border-0 md:bg-transparent md:p-0">
-        <li>
-            <a
-                routerLink="/hoy"
-                routerLinkActive
-                #hoy="routerLinkActive"
-                (click)="cerrarMenu()"
-                class="block rounded px-3 py-2 hover:text-texto md:p-0"
-                [class.text-texto]="hoy.isActive"
-                [class.font-semibold]="hoy.isActive"
-                [class.text-texto-suave]="!hoy.isActive"
-            >
-                Hoy
-            </a>
-        </li>
-        <li>
-            <a
-                routerLink="/gatos"
-                routerLinkActive
-                #gatos="routerLinkActive"
-                (click)="cerrarMenu()"
-                class="block rounded px-3 py-2 hover:text-texto md:p-0"
-                [class.text-texto]="gatos.isActive"
-                [class.font-semibold]="gatos.isActive"
-                [class.text-texto-suave]="!gatos.isActive"
-            >
-              Gatos
-            </a>
-        </li>
-      </ul>
-     </div>
-  </div>
-</nav>
+  <!-- Barra de arriba: solo en celular -->
+  <header class="flex items-center justify-between px-5 pt-5 md:hidden">
+    <span class="flex items-center gap-2">
+      <span class="flex size-10 items-center justify-center rounded-full bg-chip-lavanda">
+        <span class="material-symbols-rounded text-[22px]">pets</span>
+      </span>
+      <span class="font-titulo text-[22px] font-semibold">michilog</span>
+    </span>
+    <app-boton-tema />
+  </header>
 
-<main class="mx-auto max-w-screen-xl p-4">
-  <router-outlet />
-</main>
+  <main class="mx-auto w-full max-w-screen-lg px-5 pb-28 pt-4 md:px-0 md:pb-0 md:pt-0">
+    <router-outlet />
+  </main>
+
+  <!-- Barra de abajo: solo en celular -->
+  <nav class="fixed inset-x-4 bottom-4 flex h-[68px] items-center justify-around rounded-full border border-borde bg-superficie px-2 md:hidden">
+    @for (enlace of enlaces; track enlace.ruta) {
+      <a
+        [routerLink]="enlace.ruta"
+        routerLinkActive
+        #rla="routerLinkActive"
+        class="flex h-12 items-center gap-2 rounded-full px-4 font-bold"
+        [class.bg-chip-lavanda]="rla.isActive"
+        [class.text-texto]="rla.isActive"
+        [class.text-texto-suave]="!rla.isActive"
+      >
+        <span class="material-symbols-rounded text-[22px]" [class.icono-lleno]="rla.isActive">{{ enlace.icono }}</span>
+        @if (rla.isActive) {
+          <span>{{ enlace.texto }}</span>
+        }
+      </a>
+    }
+  </nav>
+</div>
