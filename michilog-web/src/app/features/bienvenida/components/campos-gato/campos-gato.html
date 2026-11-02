@@ -29,13 +29,14 @@
       <button
         type="button"
         (click)="c.sexo.setValue(opcion.valor)"
-        class="h-11 rounded-full border font-bold"
+        [title]="opcion.texto"
+        class="flex h-11 items-center justify-center rounded-full border"
         [class.bg-boton]="c.sexo.value === opcion.valor"
         [class.text-boton-texto]="c.sexo.value === opcion.valor"
         [class.border-boton]="c.sexo.value === opcion.valor"
         [class.border-borde]="c.sexo.value !== opcion.valor"
       >
-        {{ opcion.texto }}
+        <span class="material-symbols-rounded text-[24px]">{{ opcion.icono }}</span>
       </button>
     }
   </div>

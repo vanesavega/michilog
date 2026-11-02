@@ -74,7 +74,9 @@ body {
 /* Marco de la bienvenida: en web, tarjeta de dos columnas */
 .marco-bienvenida {
   @apply mx-auto flex min-h-dvh max-w-md flex-col
-         md:my-12 md:min-h-[680px] md:max-w-6xl md:flex-row md:rounded-[48px] md:border md:border-borde md:bg-superficie;
+         md:m-6 md:min-h-[calc(100dvh-3rem)] md:max-w-none md:flex-row
+         md:rounded-[48px] md:border md:border-borde md:bg-superficie
+         2xl:mx-auto 2xl:max-w-[1600px];
 }
 
 /* La página que pone el router-outlet ocupa todo el alto disponible */

@@ -1,4 +1,4 @@
-import { ColorGato } from "../../../shared/carita-gato/pelaje";
+import { ColorGato } from "../carita-gato/pelaje";
 
 export type Sexo = 'macho' | 'hembra';
 export interface Gato {

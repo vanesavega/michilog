@@ -1,6 +1,6 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ColorGato } from '../../../shared/carita-gato/pelaje';
-import { NuevoGato, Sexo } from '../models/gato.model';
+import { NuevoGato, Sexo } from '../../../shared/models/gato.model';
 
 export type GatoForm = FormGroup<{
   nombre: FormControl<string>;

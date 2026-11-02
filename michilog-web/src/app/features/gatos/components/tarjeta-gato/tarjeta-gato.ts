@@ -1,5 +1,5 @@
 import { Component, computed, input } from '@angular/core';
-import { Gato } from '../../models/gato.model';
+import { Gato } from '../../../../shared/models/gato.model';
 import { calcularEdad } from '../../utils/edad';
 import { CaritaGato } from '../../../../shared/carita-gato/carita-gato';
 

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240">
+  <!-- sombra -->
+  <ellipse cx="165" cy="214" rx="128" ry="12" fill="#2b2838" opacity="0.08" />
+
+  <!-- cuerpo -->
+  <ellipse cx="185" cy="160" rx="110" ry="58" fill="#ffdcc8" />
+  <!-- rayitas del lomo -->
+  <path d="M190 104 q12 14 2 30" stroke="#f6c2a4" stroke-width="7" fill="none" stroke-linecap="round" />
+  <path d="M222 108 q12 14 2 30" stroke="#f6c2a4" stroke-width="7" fill="none" stroke-linecap="round" />
+  <path d="M254 120 q10 12 2 26" stroke="#f6c2a4" stroke-width="7" fill="none" stroke-linecap="round" />
+
+  <!-- cola enroscada al frente -->
+  <path d="M285 168 C 300 222, 180 226, 118 204" stroke="#f6c2a4" stroke-width="24" fill="none" stroke-linecap="round" />
+
+  <!-- patita -->
+  <ellipse cx="150" cy="205" rx="20" ry="11" fill="#ffe9dc" />
+
+  <!-- orejas -->
+  <path d="M62 128 L56 80 L96 104 Z" fill="#ffdcc8" stroke="#ffdcc8" stroke-width="10" stroke-linejoin="round" />
+  <path d="M112 100 L142 72 L148 118 Z" fill="#ffdcc8" stroke="#ffdcc8" stroke-width="10" stroke-linejoin="round" />
+  <path d="M66 116 L64 92 L86 106 Z" fill="#f4a9b8" opacity="0.7" />
+  <path d="M120 102 L137 86 L140 110 Z" fill="#f4a9b8" opacity="0.7" />
+
+  <!-- cabeza -->
+  <ellipse cx="104" cy="152" rx="56" ry="50" fill="#ffdcc8" />
+
+  <!-- ojos cerrados -->
+  <path d="M74 150 q9 8 18 0" stroke="#2b2838" stroke-width="3.5" fill="none" stroke-linecap="round" />
+  <path d="M114 150 q9 8 18 0" stroke="#2b2838" stroke-width="3.5" fill="none" stroke-linecap="round" />
+  <!-- cachetes -->
+  <ellipse cx="68" cy="166" rx="9" ry="5" fill="#f4a9b8" opacity="0.6" />
+  <ellipse cx="140" cy="166" rx="9" ry="5" fill="#f4a9b8" opacity="0.6" />
+  <!-- nariz y boca -->
+  <path d="M98 162 L110 162 L104 169 Z" fill="#e58c9f" />
+  <path d="M104 169 Q100 176 94 173 M104 169 Q108 176 114 173" stroke="#2b2838" stroke-width="2.5" fill="none" stroke-linecap="round" />
+
+  <!-- zzz -->
+  <g stroke="#8a80b8" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M150 52 h18 l-18 20 h18" stroke-width="5" />
+    <path d="M178 32 h13 l-13 14 h13" stroke-width="4" opacity="0.75" />
+    <path d="M198 16 h9 l-9 10 h9" stroke-width="3" opacity="0.55" />
+  </g>
+</svg>

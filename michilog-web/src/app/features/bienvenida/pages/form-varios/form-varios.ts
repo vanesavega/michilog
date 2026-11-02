@@ -2,8 +2,8 @@ import { Component, computed, inject, input, numberAttribute } from '@angular/co
 import { FormArray, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { COLORES_GATO } from '../../../../shared/carita-gato/pelaje';
-import { CamposGato } from '../../../gatos/components/campos-gato/campos-gato';
-import { aNuevoGato, crearGatoForm } from '../../../gatos/forms/gato-form';
+import { CamposGato } from '../../components/campos-gato/campos-gato';
+import { aNuevoGato, crearGatoForm } from '../../forms/gato-form';
 import { GatosStore } from '../../../gatos/gatos.store';
 
 @Component({

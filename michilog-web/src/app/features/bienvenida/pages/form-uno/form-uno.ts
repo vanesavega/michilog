@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { CamposGato } from '../../../gatos/components/campos-gato/campos-gato';
-import { aNuevoGato, crearGatoForm } from '../../../gatos/forms/gato-form';
+import { CamposGato } from '../../components/campos-gato/campos-gato';
+import { aNuevoGato, crearGatoForm } from '../../forms/gato-form';
 import { GatosStore } from '../../../gatos/gatos.store';
 
 @Component({

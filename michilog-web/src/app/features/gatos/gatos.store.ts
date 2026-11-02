@@ -1,6 +1,6 @@
 import { patchState, signalStore, withComputed, withMethods, withState } from "@ngrx/signals";
 import { GATOS_INICIALES } from "./data/gatos-iniciales";
-import { Gato, NuevoGato } from './models/gato.model'
+import { Gato, NuevoGato } from '../../shared/models/gato.model'
 import { computed } from "@angular/core";
 
 interface GatosState {

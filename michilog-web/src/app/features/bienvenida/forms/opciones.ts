@@ -1,8 +1,14 @@
-import { Sexo } from '../models/gato.model';
+import { Sexo } from '../../../shared/models/gato.model';
 
 export interface OpcionMes {
   valor: number;
   nombre: string;
+}
+
+export interface OpcionSexo {
+  valor: Sexo;
+  texto: string;
+  icono: string;
 }
 
 export const MESES: readonly OpcionMes[] = [
@@ -13,7 +19,7 @@ export const MESES: readonly OpcionMes[] = [
 const ANIO_ACTUAL = new Date().getFullYear();
 export const ANIOS: readonly number[] = Array.from({ length: 26 }, (_, i) => ANIO_ACTUAL - i);
 
-export const SEXOS: readonly { valor: Sexo; texto: string }[] = [
-  { valor: 'hembra', texto: 'Hembra' },
-  { valor: 'macho', texto: 'Macho' },
+export const SEXOS: readonly OpcionSexo[] = [
+  { valor: 'hembra', texto: 'Hembra', icono: 'female' },
+  { valor: 'macho', texto: 'Macho', icono: 'male' },
 ];
