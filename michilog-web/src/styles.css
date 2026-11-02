@@ -70,3 +70,8 @@ body {
 .icono-lleno {
   font-variation-settings: 'FILL' 1;
 }
+
+.pagina-bienvenida {
+  @apply mx-auto flex min-h-dvh max-w-md flex-col px-6 pb-8 pt-6
+         md:my-12 md:min-h-0 md:max-w-lg md:rounded-[48px] md:border md:border-borde md:bg-superficie md:p-10;
+}

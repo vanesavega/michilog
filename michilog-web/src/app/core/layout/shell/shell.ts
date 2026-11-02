@@ -1,7 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { BotonTema } from '../../tema/boton-tema/boton-tema'
-
+import { Logo } from '../../../shared/logo/logo'
 
 interface Enlace {
   ruta: string;
@@ -10,7 +10,7 @@ interface Enlace {
 }
 
 @Component({
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, BotonTema],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, BotonTema, Logo],
   selector: 'app-shell',
   templateUrl: './shell.html',
 })
