@@ -1,6 +1,6 @@
 import { Component, computed, input } from '@angular/core';
 import { Gato } from '../../../../shared/models/gato.model';
-import { calcularEdad } from '../../utils/edad';
+import { textoEdad } from '../../utils/edad';
 import { CaritaGato } from '../../../../shared/carita-gato/carita-gato';
 
 @Component({
@@ -11,9 +11,6 @@ import { CaritaGato } from '../../../../shared/carita-gato/carita-gato';
 export class TarjetaGato {
   readonly gato = input.required<Gato>();
 
-  protected readonly edad = computed(() => {
-    const nacimiento = this.gato().nacimiento;
-    return nacimiento ? calcularEdad(nacimiento) : null;
-  });
+  protected readonly edad = computed(() => textoEdad(this.gato().nacimiento, this.gato().edad));
   protected readonly simboloSexo = computed(() => (this.gato().sexo === 'macho' ? '♂' : '♀'));
 }

@@ -15,6 +15,11 @@
   --chip-durazno: #ffdcc8;
   --chip-mantequilla: #ffefb3;
   --chip-cielo: #cde5f4;
+  --sexo-macho: #8fb8ea;
+  --sexo-macho-suave: #e3eefb;
+  --sexo-hembra: #f5a8c2;
+  --sexo-hembra-suave: #fce6ee;
+  --sexo-ninguno-suave: #f0eef5;
   color-scheme: light;
 }
 
@@ -31,6 +36,11 @@
   --chip-durazno: #503a2f;
   --chip-mantequilla: #4a4329;
   --chip-cielo: #2b4254;
+  --sexo-macho: #4f72a3;
+  --sexo-macho-suave: #283246;
+  --sexo-hembra: #a65673;
+  --sexo-hembra-suave: #3a2a34;
+  --sexo-ninguno-suave: #2a2836;
   color-scheme: dark;
 }
 
@@ -47,6 +57,11 @@
   --color-chip-durazno: var(--chip-durazno);
   --color-chip-mantequilla: var(--chip-mantequilla);
   --color-chip-cielo: var(--chip-cielo);
+    --color-sexo-macho: var(--sexo-macho);
+  --color-sexo-macho-suave: var(--sexo-macho-suave);
+  --color-sexo-hembra: var(--sexo-hembra);
+  --color-sexo-hembra-suave: var(--sexo-hembra-suave);
+  --color-sexo-ninguno-suave: var(--sexo-ninguno-suave);
 }
 
 /* 2. Colores fijos y fuentes: no cambian con el tema */
@@ -79,11 +94,18 @@ body {
          2xl:mx-auto 2xl:max-w-[1600px];
 }
 
-/* La página que pone el router-outlet ocupa todo el alto disponible */
 .contenido-bienvenida > :last-child {
   display: flex;
   flex: 1;
   flex-direction: column;
+  position: relative;
+  z-index: 1;
+}
+
+/* Huellita decorativa: una silueta de huella que toma el color de fondo de la clase bg-* */
+.huellita {
+  mask: url("/ilustraciones/huellita.svg") center / contain no-repeat;
+  -webkit-mask: url("/ilustraciones/huellita.svg") center / contain no-repeat;
 }
 
 /* Cada página de la bienvenida: una columna que llena su espacio */
