@@ -1,6 +1,6 @@
 import { inject } from "@angular/core";
 import { CanActivateFn, Router } from "@angular/router";
-import { GatosStore } from "../gatos.store";
+import { GatosStore } from "../../../shared/stores/gatos.store";
 
 export const conGatosGuard : CanActivateFn = () => {
     const store = inject(GatosStore);

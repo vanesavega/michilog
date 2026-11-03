@@ -1,0 +1,11 @@
+<div class="flex items-center justify-center gap-2" role="img" [attr.aria-label]="etiqueta()">
+  @for (paso of pasos(); track paso) {
+    <span
+      class="h-3 rounded-full transition-all"
+      [class.w-8]="paso === actual()"
+      [class.bg-boton]="paso === actual()"
+      [class.w-3]="paso !== actual()"
+      [class.bg-borde]="paso !== actual()"
+    ></span>
+  }
+</div>

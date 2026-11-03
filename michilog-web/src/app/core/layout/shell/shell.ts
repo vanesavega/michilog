@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { BotonTema } from '../../tema/boton-tema/boton-tema'
-import { Logo } from '../../../shared/logo/logo'
+import { Logo } from '../../../shared/components/logo/logo'
 
 interface Enlace {
   ruta: string;

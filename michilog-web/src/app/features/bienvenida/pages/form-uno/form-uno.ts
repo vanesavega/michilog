@@ -3,10 +3,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { CamposGato } from '../../components/campos-gato/campos-gato';
 import { aNuevoGato, crearGatoForm } from '../../forms/gato-form';
-import { GatosStore } from '../../../gatos/gatos.store';
+import { NavegacionPasos } from '../../../../shared/components/paginacion/navegacion-pasos';
+import { GatosStore } from '../../../../shared/stores/gatos.store';
 
 @Component({
-  imports: [ ReactiveFormsModule, RouterLink, CamposGato ],
+  imports: [ReactiveFormsModule, RouterLink, CamposGato, NavegacionPasos],
   selector: 'app-form-uno',
   templateUrl: './form-uno.html',
 })
@@ -15,6 +16,12 @@ export class FormUno {
   private readonly router = inject(Router);
 
   protected readonly gato = crearGatoForm('durazno');
+
+  /** Aviso corto cuando intentan guardar sin nombre. */
+  protected get aviso(): string | null {
+    const nombre = this.gato.controls.nombre;
+    return nombre.touched && nombre.invalid ? 'Déjanos saber su nombre' : null;
+  }
 
   protected guardar(): void {
     if (this.gato.invalid) {

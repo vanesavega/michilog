@@ -1,7 +1,8 @@
-import { Component, computed, signal } from '@angular/core';
-import { COLORES_GATO } from '../../../../shared/carita-gato/pelaje';
-import { CaritaGato } from '../../../../shared/carita-gato/carita-gato';
-import { RouterLink } from '@angular/router';
+import { Component, computed, inject, signal } from '@angular/core';
+import { COLORES_GATO } from '../../../../shared/components/carita-gato/pelaje';
+import { CaritaGato } from '../../../../shared/components/carita-gato/carita-gato';
+import { Router, RouterLink } from '@angular/router';
+import { BienvenidaStore } from '../../bienvenida.store';
 
 const MINIMO = 2;
 const MAXIMO = 10;
@@ -12,6 +13,9 @@ const MAXIMO = 10;
   templateUrl: './cantidad.html',
 })
 export class Cantidad {
+  private readonly store = inject(BienvenidaStore);
+  private readonly router = inject(Router);
+
   protected readonly cantidad = signal(MINIMO);
 
   protected readonly caritas = computed(() => 
@@ -24,5 +28,10 @@ export class Cantidad {
   
   mas() : void {
     this.cantidad.update(n => Math.min(MAXIMO, n + 1));
+  }
+
+  protected continuar(): void {
+    this.store.elegirCantidad(this.cantidad());
+    this.router.navigate(['/bienvenida/varios']);
   }
 }

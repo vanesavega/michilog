@@ -3,14 +3,27 @@
         <span class="material-symbols-rounded">arrow_back</span>
     </a>
     <h1 class="mt-6 font-titulo text-[34px] font-semibold leading-tight">Preséntanos a la familia</h1>
-    <p class="mt-2 text-texto-suave">Solo el nombre es obligatorio. Elige el color de cada uno con los círculos.</p>
-    <div class="mt-6 grid gap-3 lg:grid-cols-2">
-        @for (grupo of formulario.controls.gatos.controls; track grupo; let i = $index) {
-        <app-campos-gato [grupo]="grupo" [titulo]="'Gato ' + (i + 1)" />
+    <p class="mt-2 text-texto-suave">
+        Solo el nombre es obligatorio.
+        @if (cantidad() > 3) {
+          Como son varios, pedimos nombre, sexo y edad. Lo demás lo completas después.
+        } @else {
+          Elige el color de cada uno con los círculos.
+        }
+    </p>
+
+    <div class="mt-5 grid gap-5 lg:grid-cols-2">
+        @for (grupo of gruposPagina; track grupo; let i = $index) {
+        <app-campos-gato [grupo]="grupo" [numero]="paginador.inicio() + i + 1" [compacto]="cantidad() > 3" />
         }
     </div>
-    <button type="submit" class="mt-6 flex h-15 items-center justify-center gap-2 rounded-full bg-boton font-bold text-boton-texto">
-        Guardar y empezar
-        <span class="material-symbols-rounded">check</span>
-    </button>
+
+    <app-navegacion-pasos
+      class="mt-auto pt-6"
+      [total]="paginador.totalPaginas()"
+      [actual]="paginador.pagina()"
+      [error]="aviso"
+      (anterior)="anterior()"
+      (siguiente)="siguiente()"
+    />
 </form>

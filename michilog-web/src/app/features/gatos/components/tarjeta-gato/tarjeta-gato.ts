@@ -1,7 +1,7 @@
 import { Component, computed, input } from '@angular/core';
 import { Gato } from '../../../../shared/models/gato.model';
 import { textoEdad } from '../../utils/edad';
-import { CaritaGato } from '../../../../shared/carita-gato/carita-gato';
+import { CaritaGato } from '../../../../shared/components/carita-gato/carita-gato';
 
 @Component({
   imports: [CaritaGato],

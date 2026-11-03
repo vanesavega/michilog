@@ -15,11 +15,16 @@
   --chip-durazno: #ffdcc8;
   --chip-mantequilla: #ffefb3;
   --chip-cielo: #cde5f4;
+  --error: #c43d5c;
   --sexo-macho: #8fb8ea;
   --sexo-macho-suave: #e3eefb;
   --sexo-hembra: #f5a8c2;
   --sexo-hembra-suave: #fce6ee;
-  --sexo-ninguno-suave: #f0eef5;
+  --campo-mantequilla: #fbf6e6;
+  --campo-lavanda: #f1edfb;
+  --campo-menta: #e8f6ef;
+  --campo-durazno: #fcf0e9;
+  --campo-cielo: #e8f3fa;
   color-scheme: light;
 }
 
@@ -36,11 +41,16 @@
   --chip-durazno: #503a2f;
   --chip-mantequilla: #4a4329;
   --chip-cielo: #2b4254;
+  --error: #f08aa3;
   --sexo-macho: #4f72a3;
   --sexo-macho-suave: #283246;
   --sexo-hembra: #a65673;
   --sexo-hembra-suave: #3a2a34;
-  --sexo-ninguno-suave: #2a2836;
+  --campo-mantequilla: #34311f;
+  --campo-lavanda: #2d2940;
+  --campo-menta: #25362f;
+  --campo-durazno: #372d27;
+  --campo-cielo: #25333d;
   color-scheme: dark;
 }
 
@@ -57,11 +67,16 @@
   --color-chip-durazno: var(--chip-durazno);
   --color-chip-mantequilla: var(--chip-mantequilla);
   --color-chip-cielo: var(--chip-cielo);
-    --color-sexo-macho: var(--sexo-macho);
+  --color-error: var(--error);
+  --color-sexo-macho: var(--sexo-macho);
   --color-sexo-macho-suave: var(--sexo-macho-suave);
   --color-sexo-hembra: var(--sexo-hembra);
   --color-sexo-hembra-suave: var(--sexo-hembra-suave);
-  --color-sexo-ninguno-suave: var(--sexo-ninguno-suave);
+  --color-campo-mantequilla: var(--campo-mantequilla);
+  --color-campo-lavanda: var(--campo-lavanda);
+  --color-campo-menta: var(--campo-menta);
+  --color-campo-durazno: var(--campo-durazno);
+  --color-campo-cielo: var(--campo-cielo);
 }
 
 /* 2. Colores fijos y fuentes: no cambian con el tema */
@@ -88,12 +103,13 @@ body {
 
 /* Marco de la bienvenida: en web, tarjeta de dos columnas */
 .marco-bienvenida {
-  @apply mx-auto flex min-h-dvh max-w-md flex-col
+  @apply mx-auto flex min-h-dvh max-w-2xl flex-col
          md:m-6 md:min-h-[calc(100dvh-3rem)] md:max-w-none md:flex-row
          md:rounded-[48px] md:border md:border-borde md:bg-superficie
          2xl:mx-auto 2xl:max-w-[1600px];
 }
 
+/* La página que pone el router-outlet ocupa todo el alto disponible */
 .contenido-bienvenida > :last-child {
   display: flex;
   flex: 1;

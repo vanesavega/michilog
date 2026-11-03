@@ -1,15 +1,24 @@
 <div
   [formGroup]="grupo()"
-  class="flex flex-col gap-4 rounded-[32px] border border-borde p-4 transition-colors"
-  [class.bg-sexo-macho-suave]="c.sexo.value === 'macho'"
-  [class.bg-sexo-hembra-suave]="c.sexo.value === 'hembra'"
-  [class.bg-sexo-ninguno-suave]="c.sexo.value === null"
+  class="relative flex flex-col items-center mt-16 gap-4 rounded-[36px] p-3 pt-0 shadow-[0_8px_30px_rgb(0_0_0/0.06)] transition-colors md:gap-5 md:rounded-[40px] md:p-5 md:pt-0"
+  [ngClass]="fondos[c.color.value]"
 >
 
-  <!-- Carita a la izquierda, colores a la derecha -->
-  <div class="flex items-center gap-4">
-    <app-carita-gato class="block size-24 shrink-0" [color]="c.color.value" />
-    <div class="flex flex-wrap gap-2" role="radiogroup" aria-label="Color del gato">
+  <!-- Número como sello sobre la esquina: no ocupa espacio. Solo con varios gatos. -->
+  @if (numero() !== null) {
+    <span class="absolute -left-3 -top-3 z-10 flex size-10 items-center justify-center rounded-full border-[3px] border-superficie bg-chip-lavanda font-titulo text-lg font-semibold shadow-sm">
+      {{ numero() }}
+    </span>
+  }
+
+  <!-- Carita centrada -->
+  <div class="-mt-16 grid size-40 place-items-center rounded-full bg-superficie shadow-[0_6px_20px_rgb(0_0_0/0.08)]">
+    <app-carita-gato class="block size-32" [color]="c.color.value" />
+  </div>
+
+  <!-- Colores debajo de la carita -->
+  @if (!compacto()) {
+    <div class="flex flex-wrap justify-center gap-2" role="radiogroup" aria-label="Color del gato">
       @for (color of colores; track color) {
         <button
           type="button"
@@ -19,83 +28,53 @@
           [title]="color"
           (click)="elegirColor(color)"
           [style.background-color]="pelaje[color]"
-          class="size-9 rounded-full border-2"
+          class="size-9 rounded-full border-2 shadow-sm"
           [class.border-texto]="c.color.value === color"
-          [class.border-transparent]="c.color.value !== color"
+          [class.border-borde]="c.color.value !== color"
         ></button>
       }
     </div>
-  </div>
+  }
 
   <!-- Nombre y sexo -->
-  <div class="flex flex-col gap-1">
-    <span class="px-2 text-sm font-bold text-texto-suave">{{ titulo() }}</span>
-    <div class="flex items-center gap-2">
+  <div class="flex w-full flex-col gap-3">
+    <label class="flex flex-col gap-1">
+      <span class="px-2 text-sm font-semibold text-texto-suave">Nombre</span>
       <input
         formControlName="nombre"
         placeholder="¿Cómo se llama?"
-        class="h-12 min-w-0 flex-1 rounded-full border border-borde bg-fondo px-5 md:bg-superficie"
+        [attr.aria-invalid]="c.nombre.touched && c.nombre.invalid"
+        class="h-12 w-full rounded-full border border-borde bg-fondo px-5 md:bg-superficie"
       />
+    </label>
+
+    <div class="grid grid-cols-2 gap-2">
       @for (opcion of sexos; track opcion.valor) {
         <button
           type="button"
           (click)="c.sexo.setValue(opcion.valor)"
-          [title]="opcion.texto"
-          [attr.aria-label]="opcion.texto"
           [attr.aria-pressed]="c.sexo.value === opcion.valor"
-          [ngClass]="c.sexo.value === opcion.valor ? opcion.clase : 'bg-superficie text-texto-suave'"
-          class="flex size-12 shrink-0 items-center justify-center rounded-full border border-borde"
+          [ngClass]="c.sexo.value === opcion.valor ? opcion.clase : 'bg-superficie/70 text-texto-suave'"
+          class="flex h-12 items-center justify-center gap-2 rounded-full border border-transparent font-semibold"
         >
-          <span class="material-symbols-rounded text-[24px]">{{ opcion.icono }}</span>
+          <span class="material-symbols-rounded text-[22px]">{{ opcion.icono }}</span>
+          <span>{{ opcion.texto }}</span>
         </button>
       }
     </div>
   </div>
 
-  @if (c.nombre.touched && c.nombre.invalid) {
-    <p class="px-2 text-sm font-bold text-error">Ponle un nombre (máximo 30 letras)</p>
+  <!-- Edad: plegada por defecto; abierta si ya tiene valor -->
+  @if (edadAbierta() || c.edad.value !== null) {
+    <app-campo-edad class="w-full" [control]="c.edad" [max]="maxEdad" [enfocar]="edadAbierta()" />
+  } @else {
+    <button
+      type="button"
+      (click)="edadAbierta.set(true)"
+      class="flex h-12 w-full items-center justify-center gap-2 rounded-full border border-dashed border-texto-suave/30 bg-superficie/50 font-semibold text-texto-suave"
+    >
+      <span class="material-symbols-rounded text-[20px]">add</span>
+      Agregar edad
+    </button>
   }
-
-  <!-- Edad: opcional -->
-  <div class="flex flex-col gap-2">
-    <label class="flex items-center gap-3">
-      <span class="w-16 text-sm font-bold text-texto-suave">Edad</span>
-      <input
-        type="number"
-        formControlName="edad"
-        placeholder="años"
-        class="h-11 w-28 rounded-full border border-borde bg-fondo px-4 md:bg-superficie"
-      />
-    </label>
-    @if (c.edad.value !== null && c.anio.value === null) {
-      <p class="px-2 text-sm text-texto-suave">Coloca la fecha de nacimiento y la edad se calcula sola.</p>
-    }
-  </div>
-
-  <!-- Fecha de nacimiento: opcional, con la precisión que se sepa -->
-  <div class="flex flex-col gap-1">
-    <span class="px-2 text-sm font-bold text-texto-suave">
-      Fecha de nacimiento <span class="font-normal">(opcional)</span>
-    </span>
-    <div class="grid grid-cols-3 gap-2">
-      <select formControlName="dia" class="h-11 rounded-full border border-borde bg-fondo px-3 md:bg-superficie">
-        <option [ngValue]="null">Día</option>
-        @for (dia of dias; track dia) {
-          <option [ngValue]="dia">{{ dia }}</option>
-        }
-      </select>
-      <select formControlName="mes" class="h-11 rounded-full border border-borde bg-fondo px-3 md:bg-superficie">
-        <option [ngValue]="null">Mes</option>
-        @for (mes of meses; track mes.valor) {
-          <option [ngValue]="mes.valor">{{ mes.nombre }}</option>
-        }
-      </select>
-      <select formControlName="anio" class="h-11 rounded-full border border-borde bg-fondo px-3 md:bg-superficie">
-        <option [ngValue]="null">Año</option>
-        @for (anio of anios; track anio) {
-          <option [ngValue]="anio">{{ anio }}</option>
-        }
-      </select>
-    </div>
-  </div>
 </div>

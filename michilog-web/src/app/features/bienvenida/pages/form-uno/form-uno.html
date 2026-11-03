@@ -3,12 +3,10 @@
         <span class="material-symbols-rounded">arrow_back</span>
     </a>
     <h1 class="mt-8 font-titulo text-[34px] font-semibold leading-tight">Cuéntanos de tu gato</h1>
-    <p class="mt-3 text-texto-suave">Solo el nombre es obligatorio. Toca la carita para cambiar su color.</p>
+    <p class="mt-3 text-texto-suave">Solo el nombre es obligatorio. Elige su color con los círculos.</p>
     <div class="mt-8">
         <app-campos-gato [grupo]="gato" />
     </div>
-    <button type="submit" class="mt-auto flex h-15 items-center justify-center gap-2 rounded-full bg-boton font-bold text-boton-texto md:mt-10">
-        Guardar y empezar
-        <span class="material-symbols-rounded">check</span>
-    </button>
+
+    <app-navegacion-pasos class="mt-auto pt-6" [total]="1" [actual]="0" [error]="aviso" />
 </form>

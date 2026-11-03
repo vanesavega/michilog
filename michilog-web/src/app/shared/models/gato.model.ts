@@ -1,4 +1,4 @@
-import { ColorGato } from "../carita-gato/pelaje";
+import { ColorGato } from "../components/carita-gato/pelaje";
 
 export type Sexo = 'macho' | 'hembra';
 
