@@ -1,7 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormArray, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { COLORES_GATO } from '../../../../shared/components/carita-gato/pelaje';
+import { COLORES_PELAJE } from '../../../../shared/components/carita-gato/paletas';
+import { OJOS_POR_DEFECTO } from '../../../../shared/models/apariencia.model';
 import { CamposGato } from '../../components/campos-gato/campos-gato';
 import { aNuevoGato, crearGatoForm, GatoForm } from '../../forms/gato-form';
 import { crearPaginador } from '../../../../shared/components/paginacion/paginador';
@@ -35,7 +36,7 @@ export class FormVarios implements OnInit {
   ngOnInit(): void {
     this.formulario = new FormGroup({
       gatos: new FormArray(
-        Array.from({ length: this.cantidad() }, (_, i) => crearGatoForm(COLORES_GATO[i % COLORES_GATO.length])),
+        Array.from({ length: this.cantidad() }, (_, i) => crearGatoForm({ pelaje: COLORES_PELAJE[i % COLORES_PELAJE.length], ojos: OJOS_POR_DEFECTO })),
       ),
     });
   }

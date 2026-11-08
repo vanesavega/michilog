@@ -1,0 +1,30 @@
+<details class="group rounded-[28px] border border-borde bg-superficie p-4">
+  <summary class="flex cursor-pointer list-none items-center gap-3 [&::-webkit-details-marker]:hidden">
+    <div class="min-w-0 flex-1">
+      <p class="font-bold text-texto">Su día · {{ registros().length }} {{ registros().length === 1 ? 'registro' : 'registros' }}</p>
+      @if (filas()[0]; as ultimo) {
+        <p class="truncate text-sm text-texto-suave">Último: {{ ultimo.tipo.texto }} · {{ ultimo.hora }}</p>
+      }
+    </div>
+    <span class="material-symbols-rounded text-texto-suave transition-transform group-open:rotate-180">expand_more</span>
+  </summary>
+
+  <div class="mt-3">
+    @for (fila of filas(); track fila.id) {
+      <div class="flex items-center gap-3 border-t border-borde py-3 last:pb-0">
+        <span [class]="fila.tipo.fondo" class="grid size-10 shrink-0 place-items-center rounded-full text-texto">
+          <span class="material-symbols-rounded text-[22px]">{{ fila.tipo.icono }}</span>
+        </span>
+        <div class="min-w-0 flex-1">
+          <p class="font-bold text-texto">{{ fila.tipo.texto }}</p>
+          @if (fila.nota) {
+            <p class="truncate text-sm text-texto-suave">{{ fila.nota }}</p>
+          }
+        </div>
+        <span class="shrink-0 text-sm font-semibold text-texto-suave">{{ fila.hora }}</span>
+      </div>
+    } @empty {
+      <p class="border-t border-borde pt-3 text-texto-suave">Todavía no hay nada anotado hoy.</p>
+    }
+  </div>
+</details>

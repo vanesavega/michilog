@@ -1,5 +1,6 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { COLORES_GATO } from '../../../../shared/components/carita-gato/pelaje';
+import { COLORES_PELAJE } from '../../../../shared/components/carita-gato/paletas';
+import { Apariencia, OJOS_POR_DEFECTO } from '../../../../shared/models/apariencia.model';
 import { CaritaGato } from '../../../../shared/components/carita-gato/carita-gato';
 import { Router, RouterLink } from '@angular/router';
 import { BienvenidaStore } from '../../bienvenida.store';
@@ -19,7 +20,7 @@ export class Cantidad {
   protected readonly cantidad = signal(MINIMO);
 
   protected readonly caritas = computed(() => 
-    Array.from({ length: this.cantidad()}, (_, i) => COLORES_GATO[i % COLORES_GATO.length])
+    Array.from({ length: this.cantidad()}, (_, i): Apariencia => ({ pelaje: COLORES_PELAJE[i % COLORES_PELAJE.length], ojos: OJOS_POR_DEFECTO }))
   )
 
   menos() : void {

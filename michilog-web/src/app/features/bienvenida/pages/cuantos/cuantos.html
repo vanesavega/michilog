@@ -16,8 +16,8 @@
         [class.border-transparent]="eleccion() !== opcion.valor"
       >
         <span class="flex size-22 shrink-0 items-center justify-center rounded-full bg-chip-menta">
-          @for (color of opcion.caritas; track $index) {
-            <app-carita-gato class="-mx-1 block size-12" [color]="color" />
+          @for (apariencia of opcion.caritas; track $index) {
+            <app-carita-gato class="-mx-1 block size-12" [apariencia]="apariencia" />
           }
         </span>
         <span class="flex-1">

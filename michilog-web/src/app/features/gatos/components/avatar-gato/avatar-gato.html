@@ -1,0 +1,6 @@
+<div class="flex flex-col items-center gap-3">
+  <div [class]="fondo()" class="grid size-32 place-items-center rounded-full shadow-[0_8px_30px_rgb(0_0_0/0.06)] transition-transform group-hover:scale-105 md:size-36">
+    <app-carita-gato class="block size-24 md:size-28" [apariencia]="gato().apariencia" />
+  </div>
+  <p class="font-titulo text-xl font-semibold text-texto">{{ gato().nombre }}</p>
+</div>

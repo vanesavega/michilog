@@ -1,0 +1,48 @@
+<article [class]="fondo()"
+  class="flex flex-col items-center gap-4 rounded-[36px] p-5 pt-0 shadow-[0_8px_30px_rgb(0_0_0/0.06)]">
+  <div class="-mt-16 grid size-40 place-items-center rounded-full bg-superficie shadow-[0_6px_20px_rgb(0_0_0/0.08)]">
+    <app-carita-gato class="block size-32" [apariencia]="gato().apariencia" />
+  </div>
+
+  <div class="flex items-center gap-1">
+    <h1 class="font-titulo text-3xl font-semibold text-texto">{{ gato().nombre }}</h1>
+    @if (gato().sexo === 'hembra') {
+      <span class="material-symbols-rounded text-[22px] text-texto-suave">female</span>
+    } @else if (gato().sexo === 'macho') {
+      <span class="material-symbols-rounded text-[22px] text-texto-suave">male</span>
+    }
+  </div>
+
+  <div class="flex flex-wrap justify-center gap-2">
+    @if (edad()) {
+      <span class="rounded-full bg-superficie px-3 py-1 text-sm font-semibold text-texto-suave">{{ edad() }}</span>
+    }
+    @if (gato().pesoKg !== null) {
+      <span class="rounded-full bg-superficie px-3 py-1 text-sm font-semibold text-texto-suave">{{ gato().pesoKg }} kg</span>
+    }
+    @if (gato().esterilizado) {
+      <span class="rounded-full bg-superficie px-3 py-1 text-sm font-semibold text-texto-suave">{{ esterilizado() }}</span>
+    }
+  </div>
+
+  @if (nacimiento() || gato().raza) {
+    <dl class="grid w-full gap-3 rounded-[28px] bg-superficie p-4 sm:grid-cols-2">
+      @if (nacimiento()) {
+        <div>
+          <dt class="text-sm font-semibold text-texto-suave">Nació</dt>
+          <dd class="text-texto">{{ nacimiento() }}</dd>
+        </div>
+      }
+      @if (gato().raza) {
+        <div>
+          <dt class="text-sm font-semibold text-texto-suave">Raza</dt>
+          <dd class="text-texto">{{ gato().raza }}</dd>
+        </div>
+      }
+    </dl>
+  }
+
+  @if (gato().notas) {
+    <p class="w-full whitespace-pre-line rounded-[28px] bg-superficie p-4 text-texto">{{ gato().notas }}</p>
+  }
+</article>

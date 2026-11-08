@@ -1,11 +1,9 @@
 <div class="min-h-dvh md:flex md:gap-6 md:p-6">
-
   <!-- Menú lateral: solo en web -->
   <aside class="sticky top-6 hidden h-[calc(100dvh-3rem)] w-60 shrink-0 flex-col gap-1 rounded-[36px] border border-borde bg-superficie p-5 md:flex">
     <a routerLink="/hoy" class="mb-4 flex items-center gap-2 px-1">
       <app-logo />
     </a>
-
     @for (enlace of enlaces; track enlace.ruta) {
       <a
         [routerLink]="enlace.ruta"
@@ -20,24 +18,20 @@
         {{ enlace.texto }}
       </a>
     }
-
     <div class="mt-auto">
       <app-boton-tema />
     </div>
   </aside>
-
   <!-- Barra de arriba: solo en celular -->
   <header class="flex items-center justify-between px-5 pt-5 md:hidden">
     <app-logo />
     <app-boton-tema />
   </header>
-
-  <main class="mx-auto w-full max-w-screen-lg px-5 pb-28 pt-4 md:px-0 md:pb-0 md:pt-0">
+  <main class="mx-auto w-full max-w-5xl px-5 pb-28 pt-4 md:px-0 md:pb-0 md:pt-0">
     <router-outlet />
   </main>
-
   <!-- Barra de abajo: solo en celular -->
-  <nav class="fixed inset-x-4 bottom-4 flex h-[68px] items-center justify-around rounded-full border border-borde bg-superficie px-2 md:hidden">
+  <nav class="fixed inset-x-4 bottom-4 flex h-17 items-center justify-around rounded-full border border-borde bg-superficie px-2 md:hidden">
     @for (enlace of enlaces; track enlace.ruta) {
       <a
         [routerLink]="enlace.ruta"

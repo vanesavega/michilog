@@ -1,17 +1,16 @@
-import { Component, ElementRef, afterNextRender, input, viewChild } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Component, ElementRef, afterNextRender, input, output, viewChild } from '@angular/core';
 
-/** Edad opcional en años: se escribe o se ajusta con +/−. Vacío significa "sin indicar". */
 @Component({
   selector: 'app-campo-edad',
-  imports: [ReactiveFormsModule],
   templateUrl: './campo-edad.html',
 })
 export class CampoEdad {
-  readonly control = input.required<FormControl<number | null>>();
+  readonly etiqueta = input.required<string>();
+  readonly edad = input.required<number>();
+  readonly min = input(0);
   readonly max = input(40);
-  /** Si es true, el cursor entra al campo apenas aparece. */
   readonly enfocar = input(false);
+  readonly edadCambio = output<number>();
 
   private readonly campo = viewChild.required<ElementRef<HTMLInputElement>>('campo');
 
@@ -21,21 +20,27 @@ export class CampoEdad {
     });
   }
 
-  /** Sin edad (null) → 0 → 1 … y al restar desde 0 vuelve a "sin indicar". */
   protected cambiar(delta: number): void {
-    const actual = this.control().value;
-    if (actual === null) {
-      if (delta > 0) this.control().setValue(0);
-      return;
-    }
-    const nueva = actual + delta;
-    this.control().setValue(nueva < 0 ? null : Math.min(this.max(), nueva));
+    this.emitir(Math.min(this.max(), Math.max(this.min(), this.edad() + delta)));
   }
 
-  /** Al salir del campo: deja un número entero entre 0 y el máximo (o vacío). */
-  protected ajustar(): void {
-    const edad = this.control().value;
-    if (edad === null) return;
-    this.control().setValue(Math.min(this.max(), Math.max(0, Math.round(edad))));
+  protected escribir(): void {
+    const input = this.campo().nativeElement;
+    const digitos = input.value.replace(/\D/g, '');
+    if (digitos === '') {
+      input.value = '';
+      return;
+    }
+    const numero = Math.min(this.max(), Math.max(this.min(), Number(digitos)));
+    input.value = String(numero);
+    this.emitir(numero);
+  }
+
+  protected restaurar(): void {
+    this.campo().nativeElement.value = String(this.edad());
+  }
+
+  private emitir(nueva: number): void {
+    if (nueva !== this.edad()) this.edadCambio.emit(nueva);
   }
 }

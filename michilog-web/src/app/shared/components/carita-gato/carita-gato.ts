@@ -1,12 +1,13 @@
 import { Component, computed, input } from '@angular/core';
-import { ColorGato, PELAJE } from './pelaje';
+import { Apariencia } from '../../models/apariencia.model';
 
 @Component({
   selector: 'app-carita-gato',
   templateUrl: './carita-gato.html',
 })
 export class CaritaGato {
-  readonly color = input.required<ColorGato>();
- 
-  protected readonly pelaje = computed(() => PELAJE[this.color()]);
+  readonly apariencia = input.required<Apariencia>();
+  protected readonly contorno = computed(
+    () => `color-mix(in srgb, ${this.apariencia().pelaje} 55%, black)`,
+  );
 }

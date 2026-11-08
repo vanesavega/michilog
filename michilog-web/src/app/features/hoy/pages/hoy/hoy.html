@@ -1,0 +1,41 @@
+<div class="md:flex md:items-start md:gap-8">
+  <div class="flex min-w-0 max-w-2xl flex-1 flex-col gap-6">
+    <header>
+      <p class="text-sm font-semibold text-texto-suave first-letter:uppercase">{{ fecha }}</p>
+      @if (variosGatos()) {
+        <h1 class="font-titulo text-3xl font-semibold text-texto md:hidden">Tu familia</h1>
+      }
+    </header>
+
+    @if (variosGatos()) {
+      <div class="sticky top-0 z-10 -mx-5 bg-fondo px-5 py-2 md:hidden">
+        <app-selector-gatos
+          [gatos]="gatosStore.ordenados()"
+          [seleccionadoId]="gatosStore.seleccionado()?.id ?? null"
+          [desplegable]="muchosGatos()"
+          (seleccionar)="gatosStore.seleccionar($event)"
+        />
+      </div>
+    }
+
+    @if (gatosStore.seleccionado(); as gato) {
+      <app-tarjeta-gato-hoy class="mt-2" [gato]="gato" [estado]="estado()" (verPerfil)="verPerfil(gato.id)" />
+      <h2 class="font-titulo text-lg font-semibold text-texto">Anotar ahora</h2>
+      <app-botones-anotar [tipos]="tipos" (anotar)="anotar($event)" />
+      <app-lista-registros [registros]="registrosDeHoy()" />
+    }
+  </div>
+
+  <!-- Web: panel flotante a la derecha -->
+  @if (variosGatos()) {
+    <aside class="sticky top-4 hidden w-56 shrink-0 flex-col gap-3 md:flex">
+      <h2 class="px-1 font-titulo text-xl font-semibold text-texto">Tu familia</h2>
+      <app-selector-gatos
+        [gatos]="gatosStore.ordenados()"
+        [seleccionadoId]="gatosStore.seleccionado()?.id ?? null"
+        [vertical]="true"
+        (seleccionar)="gatosStore.seleccionar($event)"
+      />
+    </aside>
+  }
+</div>

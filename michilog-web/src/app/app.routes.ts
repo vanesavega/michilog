@@ -14,7 +14,7 @@ export const routes: Routes = [
     canActivate: [conGatosGuard],
     children: [
       { path: '', redirectTo: 'hoy', pathMatch: 'full' },
-      { path: 'hoy', loadChildren: () => import('./features/registros/registros.routes').then((m) => m.REGISTROS_ROUTES) },
+      { path: 'hoy', loadChildren: () => import('./features/hoy/hoy.routes').then((m) => m.HOY_ROUTES) },
       { path: 'gatos', loadChildren: () => import('./features/gatos/gatos.routes').then((m) => m.GATOS_ROUTES) }
     ]
   },

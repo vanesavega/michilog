@@ -1,0 +1,11 @@
+@if (store.total() > 1) {
+  <header class="mb-4">
+    <a routerLink="/gatos" aria-label="Volver a la lista" class="flex size-12 items-center justify-center rounded-full border border-borde bg-superficie">
+      <span class="material-symbols-rounded">arrow_back</span>
+    </a>
+  </header>
+}
+
+<div class="pt-16">
+  <app-ficha-gato [gato]="gato()" />
+</div>

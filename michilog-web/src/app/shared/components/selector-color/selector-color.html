@@ -1,0 +1,37 @@
+<div class="flex w-full items-start gap-3">
+  <div class="flex flex-1 flex-wrap gap-2" role="radiogroup" [attr.aria-label]="etiqueta()">
+    @for (color of colores(); track color) {
+      <button
+        type="button"
+        role="radio"
+        [attr.aria-checked]="valor() === color"
+        [attr.aria-label]="color"
+        (click)="valor.set(color)"
+        [style.background-color]="color"
+        class="size-9 rounded-full border-2 shadow-sm"
+        [class.border-texto]="valor() === color"
+        [class.border-borde]="valor() !== color"
+      ></button>
+    }
+  </div>
+
+  <label
+    class="relative grid size-9 shrink-0 cursor-pointer place-items-center rounded-full border-2 shadow-sm"
+    [class.border-texto]="esPersonalizado()"
+    [class.border-dashed]="!esPersonalizado()"
+    [class.border-borde]="!esPersonalizado()"
+    [style.background-color]="esPersonalizado() ? valor() : null"
+    title="Otro color"
+  >
+    @if (!esPersonalizado()) {
+      <span class="material-symbols-rounded text-[20px] text-texto-suave">palette</span>
+    }
+    <input
+      type="color"
+      [value]="valor()"
+      (input)="elegirDelPicker($event)"
+      [attr.aria-label]="'Otro color: ' + etiqueta()"
+      class="absolute inset-0 size-full cursor-pointer opacity-0"
+    />
+  </label>
+</div>

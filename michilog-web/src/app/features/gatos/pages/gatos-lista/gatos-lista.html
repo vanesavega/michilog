@@ -1,10 +1,12 @@
-<header class="mb-4">
+<header class="mb-8">
   <h1 class="font-titulo text-3xl font-semibold text-texto">Tu familia</h1>
 </header>
 
-<div class="flex flex-col gap-3">
+<div class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 lg:grid-cols-4">
   @for (gato of store.ordenados(); track gato.id) {
-    <app-tarjeta-gato [gato]="gato" />
+    <a [routerLink]="[gato.id]" class="group block">
+      <app-avatar-gato [gato]="gato" />
+    </a>
   } @empty {
     <p class="text-texto-suave">Todavía no hay gatos registrados.</p>
   }

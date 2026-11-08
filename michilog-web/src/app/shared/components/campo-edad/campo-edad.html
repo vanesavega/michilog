@@ -1,33 +1,31 @@
-<div class="flex w-full flex-col gap-1">
+<div class="flex w-full flex-col">
   <span class="px-2 text-sm font-semibold text-texto-suave">
-    Edad en años 
+    {{ etiqueta() }}
   </span>
-  <div class="flex h-12 w-full items-center justify-between rounded-full border border-borde bg-fondo p-1 md:bg-superficie">
+  <div class="flex h-12 w-full items-center justify-between rounded-full border border-borde p-1">
     <button
       type="button"
       (click)="cambiar(-1)"
-      [disabled]="control().value === null"
-      aria-label="Restar un año"
-      class="grid size-10 place-items-center rounded-full bg-superficie text-xl font-bold disabled:opacity-30 md:bg-fondo"
+      [disabled]="edad() <= min()"
+      aria-label="Restar uno"
+      class="grid size-10 place-items-center rounded-full text-xl font-bold disabled:opacity-30"
     >−</button>
     <input
       #campo
-      [formControl]="control()"
-      type="number"
+      [value]="edad()"
+      type="text"
       inputmode="numeric"
-      min="0"
-      [max]="max()"
-      placeholder="Sin indicar"
-      aria-label="Edad en años"
-      (blur)="ajustar()"
-      class="w-full min-w-0 bg-transparent text-center font-semibold outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+      [attr.aria-label]="etiqueta()"
+      (input)="escribir()"
+      (blur)="restaurar()"
+      class="w-full min-w-0 bg-transparent text-center font-semibold outline-none"
     />
     <button
       type="button"
       (click)="cambiar(1)"
-      [disabled]="(control().value ?? 0) >= max()"
-      aria-label="Sumar un año"
-      class="grid size-10 place-items-center rounded-full bg-superficie text-xl font-bold disabled:opacity-30 md:bg-fondo"
+      [disabled]="edad() >= max()"
+      aria-label="Sumar uno"
+      class="grid size-10 place-items-center rounded-full text-xl font-bold disabled:opacity-30"
     >+</button>
   </div>
 </div>

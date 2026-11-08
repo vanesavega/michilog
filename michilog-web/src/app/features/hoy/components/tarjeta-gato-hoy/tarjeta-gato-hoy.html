@@ -1,0 +1,26 @@
+<article [class]="fondo()" class="flex items-center gap-4 rounded-[36px] p-5 shadow-[0_8px_30px_rgb(0_0_0/0.06)]">
+  <div class="-mt-10 grid size-28 shrink-0 self-start place-items-center rounded-3xl bg-superficie shadow-[0_6px_20px_rgb(0_0_0/0.08)]">
+    <app-carita-gato class="block size-20" [apariencia]="gato().apariencia" />
+  </div>
+
+  <div class="flex min-w-0 flex-col gap-2">
+    <div class="flex items-center gap-1">
+      <h2 class="truncate font-titulo text-2xl font-semibold text-texto">{{ gato().nombre }}</h2>
+      @if (gato().sexo === 'hembra') {
+        <span class="material-symbols-rounded text-[20px] text-texto-suave">female</span>
+      } @else if (gato().sexo === 'macho') {
+        <span class="material-symbols-rounded text-[20px] text-texto-suave">male</span>
+      }
+    </div>
+
+    <div class="flex flex-wrap items-center gap-2">
+      <span [class]="estado().fondo" class="flex items-center gap-1 rounded-full px-3 py-1 text-sm font-bold text-texto">
+        <span class="material-symbols-rounded text-[18px]">{{ estado().icono }}</span>
+        {{ estado().texto }}
+      </span>
+      <button type="button" class="rounded-full bg-superficie px-3 py-1 text-sm font-bold text-texto-suave" (click)="verPerfil.emit()">
+        Ver perfil
+      </button>
+    </div>
+  </div>
+</article>

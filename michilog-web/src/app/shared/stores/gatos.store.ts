@@ -5,20 +5,30 @@ import { computed } from "@angular/core";
 
 interface GatosState {
     gatos: Gato[];
+    seleccionadoId: string | null;
 }
 
 const estadoInicial: GatosState = {
-    gatos: GATOS_INICIALES
+    gatos: GATOS_INICIALES,
+    seleccionadoId: null,
 }
 
 export const GatosStore = signalStore(
     { providedIn: 'root' },
     withState(estadoInicial),
-    withComputed(({ gatos }) => ({
-        total: computed(() => gatos().length),
-        ordenados: computed(() => [...gatos()].sort((a, b) => a.nombre.localeCompare(b.nombre)))
-    })),
+    withComputed(({ gatos, seleccionadoId }) => {
+        const ordenados = computed(() => [...gatos()].sort((a, b) => a.nombre.localeCompare(b.nombre)));
+        return {
+            total: computed(() => gatos().length),
+            ordenados,
+            /** El gato elegido; si no hay ninguno, el primero por orden alfabético. */
+            seleccionado: computed(() => gatos().find(g => g.id === seleccionadoId()) ?? ordenados()[0] ?? null),
+        };
+    }),
     withMethods((store) => ({
+        seleccionar(id: string): void {
+            patchState(store, { seleccionadoId: id });
+        },
         porId(id: string): Gato | undefined {
             return store.gatos().find(g => g.id === id);
         },

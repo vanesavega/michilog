@@ -1,0 +1,25 @@
+<dialog #dialogo class="m-auto w-[min(92vw,40rem)] rounded-[36px] border border-borde bg-superficie p-0 text-texto backdrop:bg-black/40">
+  <div class="flex flex-col items-center gap-5 p-5">
+    <h2 class="font-titulo text-2xl font-semibold">Apariencia</h2>
+
+    <div class="grid size-36 place-items-center rounded-full bg-fondo">
+      <app-carita-gato class="block size-28" [apariencia]="vista()" />
+    </div>
+
+    <div class="grid w-full gap-6 sm:grid-cols-2">
+      <section class="flex flex-col gap-2">
+        <h3 class="px-1 text-sm font-semibold text-texto-suave">Pelaje</h3>
+        <app-selector-color etiqueta="Color del pelaje" [colores]="coloresPelaje" [(valor)]="pelaje" />
+      </section>
+      <section class="flex flex-col gap-2">
+        <h3 class="px-1 text-sm font-semibold text-texto-suave">Ojos</h3>
+        <app-selector-color etiqueta="Color de los ojos" [colores]="coloresOjos" [(valor)]="ojos" />
+      </section>
+    </div>
+
+    <div class="grid w-full grid-cols-2 gap-3">
+      <button type="button" (click)="cerrar()" class="h-12 rounded-full border border-borde bg-superficie font-semibold">Cancelar</button>
+      <button type="button" (click)="confirmar()" class="h-12 rounded-full bg-boton font-semibold text-boton-texto">Listo</button>
+    </div>
+  </div>
+</dialog>

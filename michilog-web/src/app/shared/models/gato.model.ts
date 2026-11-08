@@ -1,4 +1,5 @@
-import { ColorGato } from "../components/carita-gato/pelaje";
+import { Apariencia } from './apariencia.model';
+
 
 export type Sexo = 'macho' | 'hembra';
 
@@ -6,9 +7,9 @@ export interface Gato {
     id: string,
     nombre: string,
     sexo: Sexo | null,
-    color: ColorGato,
+    apariencia: Apariencia,
     nacimiento: string | null,
-    edad: number | null,
+    edadMeses: number | null,
     raza: string,
     pesoKg: number | null,
     esterilizado: boolean,

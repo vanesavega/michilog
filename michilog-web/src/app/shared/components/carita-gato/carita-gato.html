@@ -1,15 +1,29 @@
-<svg viewBox="0 0 120 120" width="100%" height="100%" aria-hidden="true">
-  <path d="M26 50 C22 34 22 20 26 12 C30 10 44 20 52 30 Z" [attr.fill]="pelaje()" stroke="#2b2838" stroke-opacity="0.35" stroke-width="2.5" stroke-linejoin="round" />
-  <path d="M94 50 C98 34 98 20 94 12 C90 10 76 20 68 30 Z" [attr.fill]="pelaje()" stroke="#2b2838" stroke-opacity="0.35" stroke-width="2.5" stroke-linejoin="round" />
-  <path d="M31 40 C29 30 29 22 31 18 C35 19 42 25 46 30 Z" fill="#fff" opacity="0.55" />
-  <path d="M89 40 C91 30 91 22 89 18 C85 19 78 25 74 30 Z" fill="#fff" opacity="0.55" />
-  <ellipse cx="60" cy="68" rx="42" ry="38" [attr.fill]="pelaje()" stroke="#2b2838" stroke-opacity="0.35" stroke-width="2.5" stroke-linejoin="round" />
-  <circle cx="44" cy="64" r="5" fill="#2b2838" />
-  <circle cx="76" cy="64" r="5" fill="#2b2838" />
-  <circle cx="45.5" cy="62.5" r="1.6" fill="#fff" />
-  <circle cx="77.5" cy="62.5" r="1.6" fill="#fff" />
-  <ellipse cx="34" cy="78" rx="6" ry="3.5" fill="#f4a9b8" opacity="0.6" />
-  <ellipse cx="86" cy="78" rx="6" ry="3.5" fill="#f4a9b8" opacity="0.6" />
-  <path d="M56 74 L64 74 L60 79 Z" fill="#e58c9f" />
-  <path d="M60 79 Q57 85 52 83 M60 79 Q63 85 68 83" stroke="#2b2838" stroke-width="2" fill="none" stroke-linecap="round" />
+<svg viewBox="8 14 184 168" width="100%" height="100%" aria-hidden="true">
+  <!-- patitas pequeñas bajo la barbilla -->
+  <ellipse cx="83" cy="158" rx="18" ry="13" [attr.fill]="apariencia().pelaje" [style.stroke]="contorno()" stroke-width="4"/>
+  <ellipse cx="117" cy="158" rx="18" ry="13" [attr.fill]="apariencia().pelaje" [style.stroke]="contorno()" stroke-width="4"/>
+  <!-- contornos (debajo): cabeza y orejas, para que solo quede el borde exterior -->
+  <g [style.fill]="contorno()" [style.stroke]="contorno()" stroke-width="9" stroke-linejoin="round">
+    <path d="M44 86 C34 68 34 46 42 30 C60 34 78 46 90 62Z"/><path d="M156 86 C166 68 166 46 158 30 C140 34 122 46 110 62Z"/>
+    <ellipse cx="100" cy="104" rx="60" ry="54"/>
+  </g>
+  <!-- rellenos -->
+  <g [attr.fill]="apariencia().pelaje" [attr.stroke]="apariencia().pelaje" stroke-width="2" stroke-linejoin="round">
+    <path d="M44 86 C34 68 34 46 42 30 C60 34 78 46 90 62Z"/><path d="M156 86 C166 68 166 46 158 30 C140 34 122 46 110 62Z"/>
+    <ellipse cx="100" cy="104" rx="60" ry="54"/>
+  </g>
+  <!-- sombra en el interior de las orejas -->
+  <g [style.fill]="contorno()" opacity="0.3">
+    <path d="M50 80 C42 66 42 50 46 40 C60 44 72 52 80 62Z"/>
+    <path d="M150 80 C158 66 158 50 154 40 C140 44 128 52 120 62Z"/>
+  </g>
+  <!-- ojos -->
+  <ellipse cx="78" cy="106" rx="6" ry="8" [attr.fill]="apariencia().ojos" stroke="#2b2838" stroke-width="2.6"/>
+  <ellipse cx="122" cy="106" rx="6" ry="8" [attr.fill]="apariencia().ojos" stroke="#2b2838" stroke-width="2.6"/>
+  <circle cx="80" cy="103" r="2" fill="#fff"/><circle cx="124" cy="103" r="2" fill="#fff"/>
+  <!-- nariz y boca -->
+  <path d="M95 118 C95 115 105 115 105 118 C105 121 102 123 100 123 C98 123 95 121 95 118Z" fill="#e8899a" stroke="#e8899a" stroke-width="1.6" stroke-linejoin="round"/>
+  <path d="M100 123 V128 M100 128 C97 135 90 135 87 131 M100 128 C103 135 110 135 113 131" fill="none" [style.stroke]="contorno()" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- bigotes: dos por lado, cortos -->
+  <path d="M52 118 C42 117 30 119 21 125 M52 126 C43 128 33 133 26 140 M148 118 C158 117 170 119 179 125 M148 126 C157 128 167 133 174 140" fill="none" [style.stroke]="contorno()" stroke-width="3" stroke-linecap="round"/>
 </svg>

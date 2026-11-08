@@ -1,9 +1,8 @@
 <div
   [formGroup]="grupo()"
-  class="relative flex flex-col items-center mt-16 gap-4 rounded-[36px] p-3 pt-0 shadow-[0_8px_30px_rgb(0_0_0/0.06)] transition-colors md:gap-5 md:rounded-[40px] md:p-5 md:pt-0"
-  [ngClass]="fondos[c.color.value]"
+  [class]="fondo()"
+  class="relative flex flex-col items-center mt-16 gap-4 rounded-[36px] p-3 pt-0 shadow-[0_8px_30px_rgb(0_0_0/0.06)] md:gap-5 md:rounded-[40px] md:p-5 md:pt-0"
 >
-
   <!-- Número como sello sobre la esquina: no ocupa espacio. Solo con varios gatos. -->
   @if (numero() !== null) {
     <span class="absolute -left-3 -top-3 z-10 flex size-10 items-center justify-center rounded-full border-[3px] border-superficie bg-chip-lavanda font-titulo text-lg font-semibold shadow-sm">
@@ -11,28 +10,23 @@
     </span>
   }
 
-  <!-- Carita centrada -->
-  <div class="-mt-16 grid size-40 place-items-center rounded-full bg-superficie shadow-[0_6px_20px_rgb(0_0_0/0.08)]">
-    <app-carita-gato class="block size-32" [color]="c.color.value" />
-  </div>
-
-  <!-- Colores debajo de la carita -->
+  <!-- Carita centrada: con colores abiertos es un botón que abre el modal de apariencia -->
   @if (!compacto()) {
-    <div class="flex flex-wrap justify-center gap-2" role="radiogroup" aria-label="Color del gato">
-      @for (color of colores; track color) {
-        <button
-          type="button"
-          role="radio"
-          [attr.aria-checked]="c.color.value === color"
-          [attr.aria-label]="color"
-          [title]="color"
-          (click)="elegirColor(color)"
-          [style.background-color]="pelaje[color]"
-          class="size-9 rounded-full border-2 shadow-sm"
-          [class.border-texto]="c.color.value === color"
-          [class.border-borde]="c.color.value !== color"
-        ></button>
-      }
+    <button
+      type="button"
+      (click)="modal.abrir()"
+      aria-label="Cambiar apariencia"
+      class="relative -mt-16 grid size-40 place-items-center rounded-full bg-superficie shadow-[0_6px_20px_rgb(0_0_0/0.08)]"
+    >
+      <app-carita-gato class="block size-32" [apariencia]="c.apariencia.value" />
+      <span class="absolute bottom-1 right-1 grid size-9 place-items-center rounded-full bg-boton text-boton-texto">
+        <span class="material-symbols-rounded text-[20px]">palette</span>
+      </span>
+    </button>
+    <app-modal-apariencia #modal [apariencia]="c.apariencia.value" (aplicar)="c.apariencia.setValue($event)" />
+  } @else {
+    <div class="-mt-16 grid size-40 place-items-center rounded-full bg-superficie shadow-[0_6px_20px_rgb(0_0_0/0.08)]">
+      <app-carita-gato class="block size-32" [apariencia]="c.apariencia.value" />
     </div>
   }
 
@@ -65,12 +59,81 @@
   </div>
 
   <!-- Edad: plegada por defecto; abierta si ya tiene valor -->
-  @if (edadAbierta() || c.edad.value !== null) {
-    <app-campo-edad class="w-full" [control]="c.edad" [max]="maxEdad" [enfocar]="edadAbierta()" />
+  @if (c.edadMeses.value !== null) {
+    <div class="relative flex w-full flex-wrap items-end gap-2 rounded-3xl border border-borde bg-superficie/50 p-3">
+      <button
+        type="button"
+        (click)="quitarEdad()"
+        aria-label="Quitar edad"
+        class="absolute -right-2 -top-2 grid size-7 place-items-center rounded-lg border border-borde bg-fondo text-texto-suave md:bg-superficie"
+      >
+        <span class="material-symbols-rounded text-[16px]">close</span>
+      </button>
+      <div class="flex w-full justify-start">
+        <div class="flex w-full gap-1 rounded-full bg-texto/5 p-1">
+          <button
+            type="button"
+            (click)="elegirUnAnioOMas()"
+            [attr.aria-pressed]="!menorDeUnAnio"
+            [ngClass]="menorDeUnAnio ? 'text-texto-suave' : [fondo(), 'text-texto']"
+            class="h-8 flex-1 rounded-full px-3 text-sm font-semibold transition-colors"
+          >
+            1 año o más
+          </button>
+          <button
+            type="button"
+            (click)="elegirMenorDeUnAnio()"
+            [attr.aria-pressed]="menorDeUnAnio"
+            [ngClass]="menorDeUnAnio ? [fondo(), 'text-texto'] : 'text-texto-suave'"
+            class="h-8 flex-1 rounded-full px-3 text-sm font-semibold transition-colors"
+          >
+            Menos de un año
+          </button>
+        </div>
+      </div>
+      @if (menorDeUnAnio) {
+        <app-campo-edad
+          class="w-full"
+          etiqueta="Meses"
+          [edad]="mesesSueltos"
+          [max]="maxMeses"
+          (edadCambio)="cambiarMeses($event)"
+        />
+      } @else {
+        <app-campo-edad
+          class="min-w-44 flex-3"
+          etiqueta="Años"
+          [edad]="anios"
+          [min]="1"
+          [max]="maxEdad"
+          [enfocar]="edadAbierta()"
+          (edadCambio)="cambiarAnios($event)"
+        />
+        @if (mesesVisibles) {
+          <app-campo-edad
+            class="min-w-36 flex-2"
+            etiqueta="Meses"
+            [edad]="mesesSueltos"
+            [max]="maxMeses"
+            [enfocar]="mesesAbiertos()"
+            (edadCambio)="cambiarMeses($event)"
+          />
+        } @else {
+          <button
+            type="button"
+            (click)="mesesAbiertos.set(true)"
+            class="flex h-12 min-w-36 flex-2 items-center justify-center gap-1 text-sm font-semibold text-texto-suave"
+          >
+            <span class="material-symbols-rounded text-[18px]">add</span>
+            Agregar meses
+          </button>
+        }
+      }
+    </div>
   } @else {
     <button
       type="button"
-      (click)="edadAbierta.set(true)"
+      (click)="abrirEdad()"
       class="flex h-12 w-full items-center justify-center gap-2 rounded-full border border-dashed border-texto-suave/30 bg-superficie/50 font-semibold text-texto-suave"
     >
       <span class="material-symbols-rounded text-[20px]">add</span>
