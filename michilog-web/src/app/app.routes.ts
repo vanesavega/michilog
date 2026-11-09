@@ -15,6 +15,7 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'hoy', pathMatch: 'full' },
       { path: 'hoy', loadChildren: () => import('./features/hoy/hoy.routes').then((m) => m.HOY_ROUTES) },
+      { path: 'diario', loadChildren: () => import('./features/diario/diario.routes').then((m) => m.DIARIO_ROUTES) },
       { path: 'gatos', loadChildren: () => import('./features/gatos/gatos.routes').then((m) => m.GATOS_ROUTES) }
     ]
   },

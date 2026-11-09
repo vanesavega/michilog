@@ -1,6 +1,6 @@
 <div class="md:flex md:items-start md:gap-8">
   <div class="flex min-w-0 max-w-2xl flex-1 flex-col gap-4">
-    <header class="-mt-2 -mb-2">
+    <header class="-mt-2" [class]="variosGatos() ? '-mb-2 md:mb-2' : 'mb-2'">
       <p class="text-sm font-semibold text-texto-suave first-letter:uppercase">{{ fecha }}</p>
     </header>
 

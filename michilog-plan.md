@@ -1,6 +1,6 @@
 # Michilog: plan del proyecto Angular + Nest
 
-Actualizado: 3 de noviembre de 2026
+Actualizado: 9 de noviembre de 2026
 
 ## Resumen
 
@@ -20,7 +20,7 @@ Los hitos 1 y 2 son solo Angular a propósito: llego a Nest con la app ya funcio
 |---|---|---|---|---|---|
 | 0 | Arranque | Dos repos (frontend y backend), sin Nx, estructura por feature | Proyecto zoneless, carpetas por dominio | Proyecto base, módulos | 3 |
 | 1 | Perfiles de los gatos | Crear, ver y editar cada gato, datos en memoria | Signals, `computed`, rutas, lazy loading, formularios reactivos, `signalStore` | Todavía nada | 10 |
-| 2 | Hoy y registro rápido | Pantalla Hoy, registrar arenero, vómito, agua, ánimo, historial | Signal Forms, `ng-content`, `viewChild`, pipe "hace X h", directiva de alerta, hoja inferior con CDK, animaciones | Todavía nada | 16 |
+| 2 | Hoy y registro rápido | Pantalla Hoy, registrar arenero, vómito, agua, comida, historial | Signal Forms, `ng-content`, `viewChild`, pipe "hace X h", hoja inferior con `<dialog>`, animaciones | Todavía nada | 16 |
 | 3 | API con base de datos | Endpoints de gatos y registros guardados en PostgreSQL | Nada nuevo | Controllers, providers, DTOs con validación, ORM, relaciones, migraciones, ConfigModule, Swagger | 22 |
 | 4 | Conectar front y back | La app deja los datos en memoria y usa la API | `httpResource()`, interceptors, manejo de errores y carga | Exception filters, interceptor de logging | 10 |
 | 5 | Fotos | Foto de perfil y fotos de síntomas | Subir y previsualizar imágenes | Subida de archivos, validación, servir imágenes | 8 |
@@ -121,23 +121,24 @@ La fase IoT empieza cuando el hito 12 esté desplegado, y suma unas 15 a 25 hora
 - Un bebedero que mide cuánta agua toman.
 - En Nest: un endpoint o un microservicio con MQTT para recibir los datos de los dispositivos, lo que sube aún más la cobertura de Nest.
 
-## Estado actual (4 de noviembre de 2026)
+## Estado actual (9 de noviembre de 2026)
 
 - **Hito 0:** completo (27 oct).
 - **Hito 1:** completo (4 de noviembre). Perfil del gato en `/gatos/:id`, lista enlazada al perfil y, con un solo gato, `/gatos` va directo a su perfil. La edición del perfil se quitó a propósito y se rehará mejor más adelante.
-- **Cronograma:** unos 1 o 2 días de atraso respecto al plan, dentro del colchón. El rediseño de UI y de los formularios de bienvenida no estaba en el plan.
-- **Siguiente:** hito 2, Hoy y registro rápido. Empezó con el paso 1 (modelo `Registro`, `RegistrosStore` y gato seleccionado en `GatosStore`).
+- **Hito 2:** completo (9 de noviembre; empezó el 4). Pantalla Hoy con registro rápido, hoja para corregir hora y nota, y Diario por días en `/diario`. Las animaciones (paso 7) se dejaron para después.
+- **Cronograma:** el hito 2 terminó el 9 de noviembre, la fecha prevista en el calendario, así que el atraso de 1 o 2 días que traía el hito 1 se recuperó. No se anotaron horas reales; el avance se mide por fechas. El rediseño de UI y de los formularios de bienvenida no estaba en el plan.
+- **Siguiente:** hito 3, API con base de datos (Nest y PostgreSQL), en un chat nuevo. Antes de empezar hay que decidir el ORM y cómo levantar PostgreSQL.
 
 ### Hito 2: pasos
 
 1. Modelo y stores: `Registro`, `RegistrosStore`, gato seleccionado en `GatosStore`. *(hecho)*
 2. Pipe "hace X h" con date-fns. *(hecho; sin reloj: el texto no se refresca solo, se suma un `RelojService` si hace falta)*
-3. Pantalla Hoy: el feature `registros` pasa a `hoy`; selector de gatos, botones "Anotar para…" (registro rápido), "Su día", enlace "Ver perfil" y chip de estado.
-4. Hoja inferior para los detalles, con `ng-content`, `viewChild` y Signal Forms. Aquí se decide si se usa el CDK o el `<dialog>` nativo.
-5. Directiva de alerta y chip "Todo en orden hoy".
-6. Diario (el historial).
-7. Animaciones.
-8. Cierre: cobertura y plan.
+3. Pantalla Hoy: el feature `registros` pasa a `hoy`; selector de gatos, botones "Anotar para…" (registro rápido), "Su día", enlace "Ver perfil" y chip de estado. *(hecho)*
+4. Hoja inferior para corregir la hora y la nota de un registro, con `ng-content`, `viewChild` y Signal Forms. Se usa el `<dialog>` nativo; el CDK se probó aparte en la rama `prueba-cdk-hoja-inferior` y no se adoptó. *(hecho)*
+5. Directiva de alerta: se probó y se descartó. Con un `[class]` en el template basta, y las directivas propias se harán cuando de verdad hagan falta. El chip de estado ("Todo normal") ya existe desde el paso 3. *(cerrado)*
+6. Diario (el historial): `/diario`, solo lectura, registros del gato elegido agrupados por día. *(hecho)*
+7. Animaciones. *(diferido: ver "Para después")*
+8. Cierre: cobertura y plan. *(hecho; la cobertura se marca cuando yo lo diga)*
 
 ### Decisiones de diseño tomadas
 
@@ -151,7 +152,11 @@ La fase IoT empieza cuando el hito 12 esté desplegado, y suma unas 15 a 25 hora
 - Las tarjetas de gato usan un fondo pastel estable según el id del gato, distinto del color del pelaje.
 - Fechas con `date-fns` (locale `es`).
 - Hoy no tiene tarjeta del gato: el gato elegido se ve en la fila de arriba (deslizable hasta 8 gatos; con más, un desplegable con `popover`) y un enlace "Ver perfil" lleva a `/gatos/:id`. No hay ruta de registros aparte: Hoy es la pantalla principal.
-- Tipos de registro: arenero, agua, comida, ánimo, vómito y síntoma. Por ahora un registro es tipo, hora y una nota opcional; los detalles se definen después.
+- Tipos de registro: arenero, agua, comida y vómito (ánimo y síntoma se quitaron por ahora). Un registro es tipo, hora y una nota opcional; los detalles se definen después.
+- Un toque en un botón de Hoy registra "ahora". Un doble toque abre la hoja con la hora del registro recién creado, sin crear uno nuevo.
+- En la lista, cada registro tiene un botón con su hora y otro de nota. Cada uno abre la hoja con solo ese campo. Si cambia la hora, la lista se reordena. La hora solo se cambia dentro del mismo día y no puede ser futura.
+- Signal Forms: en Angular 22 su API ya es pública (`FormField`, `form()`). El formulario de la hoja es el primero que los usa.
+- Diario: pantalla propia en el menú, entre Hoy y Gatos. Solo muestra; la edición de registros se queda en Hoy. El selector de gatos pasó a `shared/components/` para usarlo en Hoy y en el Diario.
 - Nest con CommonJS y Jest (ver nota `09-nest-cjs-vs-esm.md`).
 
 ### Para después
@@ -163,3 +168,6 @@ La fase IoT empieza cuando el hito 12 esté desplegado, y suma unas 15 a 25 hora
 - Revisar el contraste de la carita negra en tema oscuro.
 - Renderizar con `@if` los menús web y móvil al empaquetar la app.
 - Accesibilidad.
+- Animaciones (el paso 7 del hito 2): filas nuevas que entran con `animate.enter` en la lista de Hoy y un `transition-colors` en el chip de estado. Incluir `prefers-reduced-motion`. Sin `@angular/animations`: `animate.enter` y `animate.leave` ya vienen en `@angular/core`.
+- Directivas propias: ninguna hace falta todavía. Se harán cuando haga falta de verdad; el tema queda sin cubrir en Cobertura hasta entonces.
+- Poner un `animate.leave` a los registros cuando se puedan eliminar.

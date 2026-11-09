@@ -12,11 +12,8 @@ import { RegistrosStore } from '../../../../shared/stores/registros.store';
 import { BotonesAnotar } from '../../components/botones-anotar/botones-anotar';
 import { EditarRegistro } from '../../components/editar-registro/editar-registro';
 import { ListaRegistros } from '../../components/lista-registros/lista-registros';
-import { SelectorGatos } from '../../components/selector-gatos/selector-gatos';
+import { MAX_GATOS_EN_FILA, SelectorGatos } from '../../../../shared/components/selector-gatos/selector-gatos';
 import { TarjetaGatoHoy } from '../../components/tarjeta-gato-hoy/tarjeta-gato-hoy';
-
-/** Desde esta cantidad de gatos la fila deslizable pasa a ser un desplegable. */
-const MAX_GATOS_EN_FILA = 8;
 
 @Component({
   imports: [SelectorGatos, TarjetaGatoHoy, BotonesAnotar, ListaRegistros, HojaInferior, EditarRegistro],

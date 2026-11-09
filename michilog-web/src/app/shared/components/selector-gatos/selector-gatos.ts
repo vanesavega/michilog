@@ -1,8 +1,11 @@
 import { Component, computed, input, output } from '@angular/core';
-import { CaritaGato } from '../../../../shared/components/carita-gato/carita-gato';
-import { Gato } from '../../../../shared/models/gato.model';
-import { fondoPastel } from '../../../../shared/utils/fondo-pastel';
+import { CaritaGato } from '../carita-gato/carita-gato';
+import { Gato } from '../../models/gato.model';
+import { fondoPastel } from '../../utils/fondo-pastel';
 import { ListaGatos } from '../lista-gatos/lista-gatos';
+
+/** Desde esta cantidad de gatos la fila deslizable pasa a ser un desplegable. */
+export const MAX_GATOS_EN_FILA = 8;
 
 @Component({
   imports: [CaritaGato, ListaGatos],

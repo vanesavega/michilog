@@ -18,6 +18,7 @@ interface Enlace {
 export class Shell {
   protected readonly enlaces: Enlace[] = [
     { ruta: '/hoy', texto: 'Hoy', icono: 'home' },
+    { ruta: '/diario', texto: 'Diario', icono: 'menu_book' },
     { ruta: '/gatos', texto: 'Gatos', icono: 'pets' },
   ];
 }

@@ -1,0 +1,37 @@
+<div class="md:flex md:items-start md:gap-8">
+  <div class="flex min-w-0 max-w-2xl flex-1 flex-col gap-4">
+    <h1 class="font-titulo text-2xl font-semibold text-texto">Diario</h1>
+
+    @if (variosGatos()) {
+      <div class="sticky top-0 z-10 -mx-5 bg-fondo px-5 py-2 md:hidden">
+        <app-selector-gatos
+          [gatos]="gatosStore.ordenados()"
+          [seleccionadoId]="gatosStore.seleccionado()?.id ?? null"
+          [desplegable]="muchosGatos()"
+          (seleccionar)="gatosStore.seleccionar($event)"
+        />
+      </div>
+    }
+
+    @if (gatosStore.seleccionado(); as gato) {
+      @for (grupo of grupos(); track grupo.dia) {
+        <app-dia-registros [titulo]="grupo.titulo" [registros]="grupo.registros" />
+      } @empty {
+        <p class="px-1 text-texto-suave">Todavía no hay registros de {{ gato.nombre }}.</p>
+      }
+    }
+  </div>
+
+  <!-- Web: panel flotante a la derecha -->
+  @if (variosGatos()) {
+    <aside class="sticky top-4 hidden w-56 shrink-0 flex-col gap-3 md:flex">
+      <h2 class="px-1 font-titulo text-xl font-semibold text-texto">Tu familia</h2>
+      <app-selector-gatos
+        [gatos]="gatosStore.ordenados()"
+        [seleccionadoId]="gatosStore.seleccionado()?.id ?? null"
+        [vertical]="true"
+        (seleccionar)="gatosStore.seleccionar($event)"
+      />
+    </aside>
+  }
+</div>

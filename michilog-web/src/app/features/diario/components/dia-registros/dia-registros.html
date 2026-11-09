@@ -1,0 +1,20 @@
+<section class="flex flex-col gap-2">
+  <h2 class="px-1 text-sm font-semibold text-texto-suave first-letter:uppercase">{{ titulo() }}</h2>
+
+  <div class="rounded-[28px] border border-borde bg-superficie px-4">
+    @for (fila of filas(); track fila.id) {
+      <div class="flex items-center gap-3 border-t border-borde py-3 first:border-t-0">
+        <span [class]="fila.tipo.fondo" class="grid size-10 shrink-0 place-items-center rounded-full text-texto">
+          <span class="material-symbols-rounded text-[22px]">{{ fila.tipo.icono }}</span>
+        </span>
+        <div class="min-w-0 flex-1">
+          <p class="font-bold text-texto">{{ fila.tipo.texto }}</p>
+          @if (fila.nota) {
+            <p class="text-sm text-texto-suave">{{ fila.nota }}</p>
+          }
+        </div>
+        <span class="shrink-0 text-sm font-semibold text-texto-suave">{{ fila.hora }}</span>
+      </div>
+    }
+  </div>
+</section>
