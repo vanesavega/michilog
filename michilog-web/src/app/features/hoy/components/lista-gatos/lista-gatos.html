@@ -1,0 +1,16 @@
+<div>
+  @for (gato of gatos(); track gato.id) {
+    <button
+      type="button"
+      class="flex w-full items-center gap-3 rounded-full p-2 text-left font-bold"
+      [class.bg-chip-lavanda]="gato.id === seleccionadoId()"
+      [attr.aria-pressed]="gato.id === seleccionadoId()"
+      (click)="seleccionar.emit(gato.id)"
+    >
+      <span [class]="fondo(gato)" class="grid size-10 shrink-0 place-items-center rounded-full">
+        <app-carita-gato class="block size-7" [apariencia]="gato.apariencia" />
+      </span>
+      <span class="truncate">{{ gato.nombre }}</span>
+    </button>
+  }
+</div>

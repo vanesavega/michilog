@@ -1,6 +1,6 @@
-<div class="grid grid-cols-3 gap-4 sm:grid-cols-6">
+<div class="grid grid-cols-4 gap-2">
   @for (tipo of tipos(); track tipo.valor) {
-    <button type="button" class="group flex flex-col items-center gap-1.5" (click)="anotar.emit(tipo.valor)">
+    <button type="button" class="group flex flex-col items-center gap-1.5" (click)="tocar($event, tipo.valor)">
       <span [class]="tipo.fondo" class="grid size-14 place-items-center rounded-full text-texto transition-transform group-active:scale-90">
         <span class="material-symbols-rounded">{{ tipo.icono }}</span>
       </span>

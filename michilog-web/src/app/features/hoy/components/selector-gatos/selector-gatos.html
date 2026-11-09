@@ -1,30 +1,12 @@
-<!-- Lista de gatos en vertical: la usan el desplegable y el panel de web -->
-<ng-template #opciones>
-  @for (gato of gatos(); track gato.id) {
-    <button
-      type="button"
-      class="flex w-full items-center gap-3 rounded-full p-2 text-left font-bold"
-      [class.bg-chip-lavanda]="gato.id === seleccionadoId()"
-      [attr.aria-pressed]="gato.id === seleccionadoId()"
-      (click)="seleccionar.emit(gato.id)"
-    >
-      <span [class]="fondo(gato)" class="grid size-10 shrink-0 place-items-center rounded-full">
-        <app-carita-gato class="block size-7" [apariencia]="gato.apariencia" />
-      </span>
-      <span class="truncate">{{ gato.nombre }}</span>
-    </button>
-  }
-</ng-template>
-
 <div>
   @if (vertical()) {
     <!-- Panel de web: todos los gatos a la vista -->
     <div class="max-h-[calc(100dvh-3rem)] overflow-y-auto rounded-[28px] border border-borde bg-superficie p-3">
-      <ng-container *ngTemplateOutlet="opciones" />
+      <app-lista-gatos [gatos]="gatos()" [seleccionadoId]="seleccionadoId()" (seleccionar)="seleccionar.emit($event)" />
     </div>
   } @else if (!desplegable()) {
     <!-- Fila que se desliza con el dedo -->
-    <div class="-mx-5 flex snap-x gap-4 overflow-x-auto px-5 py-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+    <div class="-mx-5 flex snap-x gap-4 overflow-x-auto px-5 py-1 [scrollbar-none] [&::-webkit-scrollbar]:hidden">
       @for (gato of gatos(); track gato.id) {
         <button
           type="button"
@@ -70,7 +52,7 @@
       class="m-auto max-h-96 w-72 overflow-y-auto rounded-[28px] border border-borde bg-superficie p-3 text-texto backdrop:bg-black/20"
       (click)="lista.hidePopover()"
     >
-      <ng-container *ngTemplateOutlet="opciones" />
+      <app-lista-gatos [gatos]="gatos()" [seleccionadoId]="seleccionadoId()" (seleccionar)="seleccionar.emit($event)" />
     </div>
   }
 </div>

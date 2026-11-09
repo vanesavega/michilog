@@ -2,7 +2,7 @@ import { NivelEstado } from '../models/estado-gato.model';
 import { Registro } from '../models/registro.model';
 
 /** Registros que cuentan como señal de malestar. */
-const TIPOS_DE_ALERTA = ['vomito', 'sintoma'];
+const TIPOS_DE_ALERTA = ['vomito'];
 
 /** Estado del día a partir de los registros de hoy de un gato. */
 export function calcularEstado(registrosDeHoy: Registro[]): NivelEstado {

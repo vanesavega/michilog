@@ -1,10 +1,7 @@
 <div class="md:flex md:items-start md:gap-8">
-  <div class="flex min-w-0 max-w-2xl flex-1 flex-col gap-6">
-    <header>
+  <div class="flex min-w-0 max-w-2xl flex-1 flex-col gap-4">
+    <header class="-mt-2 -mb-2">
       <p class="text-sm font-semibold text-texto-suave first-letter:uppercase">{{ fecha }}</p>
-      @if (variosGatos()) {
-        <h1 class="font-titulo text-3xl font-semibold text-texto md:hidden">Tu familia</h1>
-      }
     </header>
 
     @if (variosGatos()) {
@@ -19,10 +16,16 @@
     }
 
     @if (gatosStore.seleccionado(); as gato) {
-      <app-tarjeta-gato-hoy class="mt-2" [gato]="gato" [estado]="estado()" (verPerfil)="verPerfil(gato.id)" />
+      <app-tarjeta-gato-hoy [gato]="gato" [estado]="estado()" (verPerfil)="verPerfil(gato.id)" />
       <h2 class="font-titulo text-lg font-semibold text-texto">Anotar ahora</h2>
-      <app-botones-anotar [tipos]="tipos" (anotar)="anotar($event)" />
-      <app-lista-registros [registros]="registrosDeHoy()" />
+      <app-botones-anotar [tipos]="tipos" (anotar)="anotar($event)" (detallar)="detallar()" />
+      <app-lista-registros [registros]="registrosDeHoy()" (editar)="editar($event.id, $event.campo)" />
+
+      <app-hoja-inferior #hoja [titulo]="tituloHoja()" (cerrado)="hojaCerrada()">
+        @if (registroEditando(); as registro) {
+          <app-editar-registro [registro]="registro" [campo]="campoEditando()" (guardado)="cerrarHoja()" (cancelar)="cerrarHoja()" />
+        }
+      </app-hoja-inferior>
     }
   </div>
 

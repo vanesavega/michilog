@@ -1,0 +1,41 @@
+<form (submit)="guardar($event)" novalidate class="flex flex-col gap-4">
+  <div class="flex items-center gap-3">
+    <span [class]="tipo().fondo" class="grid size-10 place-items-center rounded-full text-texto">
+      <span class="material-symbols-rounded text-[22px]">{{ tipo().icono }}</span>
+    </span>
+    <p class="font-bold text-texto">{{ tipo().texto }}</p>
+  </div>
+
+  @if (campo() === 'hora') {
+    <label class="flex flex-col gap-2">
+      <span class="px-1 text-sm font-semibold text-texto-suave">Hora</span>
+      <input
+        type="time"
+        [formField]="formulario.hora"
+        [class.border-error]="error('hora')"
+        class="h-12 rounded-full border border-borde bg-fondo px-4 text-texto"
+      />
+      @if (error('hora'); as mensaje) {
+        <span class="px-1 text-sm font-semibold text-error">{{ mensaje }}</span>
+      }
+    </label>
+  } @else {
+    <label class="flex flex-col gap-2">
+      <span class="px-1 text-sm font-semibold text-texto-suave">Nota</span>
+      <textarea
+        [formField]="formulario.nota"
+        rows="3"
+        [class.border-error]="error('nota')"
+        class="w-full resize-none rounded-3xl border border-borde bg-fondo p-4 text-texto"
+      ></textarea>
+      @if (error('nota'); as mensaje) {
+        <span class="px-1 text-sm font-semibold text-error">{{ mensaje }}</span>
+      }
+    </label>
+  }
+
+  <div class="grid grid-cols-2 gap-3">
+    <button type="button" (click)="cancelar.emit()" class="h-12 rounded-full border border-borde bg-superficie font-semibold">Cancelar</button>
+    <button type="submit" class="h-12 rounded-full bg-boton font-semibold text-boton-texto">Guardar</button>
+  </div>
+</form>

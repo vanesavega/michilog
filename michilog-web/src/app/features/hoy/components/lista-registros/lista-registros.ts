@@ -1,7 +1,7 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
 import { format, parseISO } from 'date-fns';
 import { es } from 'date-fns/locale';
-import { Registro } from '../../../../shared/models/registro.model';
+import { CampoEditable, Registro } from '../../../../shared/models/registro.model';
 import { TIPOS_REGISTRO } from '../../../../shared/models/tipos-registro';
 
 @Component({
@@ -10,6 +10,7 @@ import { TIPOS_REGISTRO } from '../../../../shared/models/tipos-registro';
 })
 export class ListaRegistros {
   readonly registros = input.required<Registro[]>();
+  readonly editar = output<{ id: string; campo: CampoEditable }>();
 
   protected readonly filas = computed(() =>
     this.registros().map((registro) => ({

@@ -128,3 +128,14 @@ body {
 .pagina-bienvenida {
   @apply flex flex-1 flex-col;
 }
+
+/* Hoja inferior: el <dialog> sube desde abajo al abrirse */
+dialog.hoja-inferior[open] {
+  animation: hoja-sube 0.25s ease-out;
+}
+
+@keyframes hoja-sube {
+  from {
+    transform: translateY(100%);
+  }
+}

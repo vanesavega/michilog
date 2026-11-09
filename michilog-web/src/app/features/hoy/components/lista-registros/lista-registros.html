@@ -21,7 +21,22 @@
             <p class="truncate text-sm text-texto-suave">{{ fila.nota }}</p>
           }
         </div>
-        <span class="shrink-0 text-sm font-semibold text-texto-suave">{{ fila.hora }}</span>
+        <button
+          type="button"
+          (click)="editar.emit({ id: fila.id, campo: 'hora' })"
+          aria-label="Cambiar la hora"
+          class="shrink-0 rounded-full bg-fondo px-3 py-1.5 text-sm font-semibold text-texto-suave"
+        >
+          {{ fila.hora }}
+        </button>
+        <button
+          type="button"
+          (click)="editar.emit({ id: fila.id, campo: 'nota' })"
+          [attr.aria-label]="fila.nota ? 'Editar la nota' : 'Agregar una nota'"
+          class="grid size-9 shrink-0 place-items-center rounded-full bg-fondo text-texto-suave"
+        >
+          <span class="material-symbols-rounded text-[20px]" [class.icono-lleno]="fila.nota">sticky_note_2</span>
+        </button>
       </div>
     } @empty {
       <p class="border-t border-borde pt-3 text-texto-suave">Todavía no hay nada anotado hoy.</p>

@@ -1,4 +1,7 @@
-export type TipoRegistro = 'arenero' | 'agua' | 'comida' | 'animo' | 'vomito' | 'sintoma';
+export type TipoRegistro = 'arenero' | 'agua' | 'comida' | 'vomito';
+
+/** Lo que se puede corregir de un registro ya anotado. */
+export type CampoEditable = 'hora' | 'nota';
 
 export interface Registro {
   id: string;
